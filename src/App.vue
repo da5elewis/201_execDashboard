@@ -4,6 +4,7 @@ import { useTheme } from 'vuetify'
 import metricsData from './data/metrics.json'
 import GrossMarginChart from './components/GrossMarginChart.vue'
 import ServiceChart from './components/ServiceChart.vue'
+import PerformanceHeatmap from './components/PerformanceHeatmap.vue'
 
 interface MonthData {
   month: string
@@ -38,6 +39,11 @@ const data = computed<MonthData[]>(() => {
     ...d.regions[selectedRegion.value]
   } as MonthData))
 })
+
+// Region data helper — get MonthData[] for a specific region
+function regionDataFor(region: string): MonthData[] {
+  return rawData.map(d => ({ month: d.month, ...d.regions[region] } as MonthData))
+}
 
 // Theme toggle
 const theme = useTheme()
@@ -196,11 +202,11 @@ const financialCards = computed(() => {
   const p = previousData.value
   const n = nationalCurrentData.value
   return [
-    { title: 'Gross Margin', value: c.grossMargin + '%', target: '15–18%', delta: delta(c.grossMargin, p?.grossMargin), nationalValue: n ? n.grossMargin + '%' : null },
-    { title: 'Net Margin', value: c.netMargin + '%', target: '>12%', delta: delta(c.netMargin, p?.netMargin), nationalValue: n ? n.netMargin + '%' : null },
-    { title: 'Accessorial Recovery', value: c.accessorialRecovery + '%', target: '>85%', delta: delta(c.accessorialRecovery, p?.accessorialRecovery), nationalValue: n ? n.accessorialRecovery + '%' : null },
-    { title: 'Buy-Rate Variance', value: (c.buyRateVariance > 0 ? '+' : '') + c.buyRateVariance + '%', target: '±5%', delta: delta(c.buyRateVariance, p?.buyRateVariance), nationalValue: n ? (n.buyRateVariance > 0 ? '+' : '') + n.buyRateVariance + '%' : null },
-    { title: 'Revenue Quality (RPM)', value: '$' + c.revenueQualityRPM.toFixed(2), target: '>$2.50', delta: delta(c.revenueQualityRPM, p?.revenueQualityRPM), nationalValue: n ? '$' + n.revenueQualityRPM.toFixed(2) : null },
+    { title: 'Gross Margin', value: c.grossMargin + '%', target: '15–18%', delta: delta(c.grossMargin, p?.grossMargin), nationalValue: n ? n.grossMargin + '%' : null, tooltip: 'Raw spread between what we bill the client and what we pay the carrier; the primary indicator of our basic pricing health.' },
+    { title: 'Net Margin', value: c.netMargin + '%', target: '>12%', delta: delta(c.netMargin, p?.netMargin), nationalValue: n ? n.netMargin + '%' : null, tooltip: 'The actual profit remaining after accounting for \u201cleakage\u201d like cargo claims, unrecovered fees, and internal operational overhead.' },
+    { title: 'Accessorial Recovery', value: c.accessorialRecovery + '%', target: '>85%', delta: delta(c.accessorialRecovery, p?.accessorialRecovery), nationalValue: n ? n.accessorialRecovery + '%' : null, tooltip: 'The percentage of \u201chidden\u201d costs (detention, lumper fees, layovers) billed by carriers that we successfully pass through to the customer.' },
+    { title: 'Buy-Rate Variance', value: (c.buyRateVariance > 0 ? '+' : '') + c.buyRateVariance + '%', target: '±5%', delta: delta(c.buyRateVariance, p?.buyRateVariance), nationalValue: n ? (n.buyRateVariance > 0 ? '+' : '') + n.buyRateVariance + '%' : null, tooltip: 'The difference between our projected carrier cost (or market index) and what we actually paid; highlights if we are overpaying for capacity.' },
+    { title: 'Revenue Quality (RPM)', value: '$' + c.revenueQualityRPM.toFixed(2), target: '>$2.50', delta: delta(c.revenueQualityRPM, p?.revenueQualityRPM), nationalValue: n ? '$' + n.revenueQualityRPM.toFixed(2) : null, tooltip: 'A measure of profitability per unit (e.g., Revenue per Mile); identifies if a high-volume client is actually worth the operational effort.' },
   ]
 })
 
@@ -209,10 +215,10 @@ const serviceCards = computed(() => {
   const p = previousData.value
   const n = nationalCurrentData.value
   return [
-    { title: 'On-Time Delivery (OTD)', value: c.onTimeDelivery + '%', target: '>95%', delta: delta(c.onTimeDelivery, p?.onTimeDelivery), nationalValue: n ? n.onTimeDelivery + '%' : null },
-    { title: 'Exception Rate', value: c.exceptionRate + '%', target: '<3%', delta: deltaReverse(c.exceptionRate, p?.exceptionRate), nationalValue: n ? n.exceptionRate + '%' : null },
-    { title: 'First-Time-Right', value: c.firstTimeRight + '%', target: '>90%', delta: delta(c.firstTimeRight, p?.firstTimeRight), nationalValue: n ? n.firstTimeRight + '%' : null },
-    { title: 'Dwell Time (Origin/Dest)', value: c.dwellTime + ' hrs', target: '<2 hrs', delta: deltaReverse(c.dwellTime, p?.dwellTime), nationalValue: n ? n.dwellTime + ' hrs' : null },
+    { title: 'On-Time Delivery (OTD)', value: c.onTimeDelivery + '%', target: '>95%', delta: delta(c.onTimeDelivery, p?.onTimeDelivery), nationalValue: n ? n.onTimeDelivery + '%' : null, tooltip: 'The percentage of shipments delivered within the customer\u2019s requested window; the ultimate benchmark for service reliability.' },
+    { title: 'Exception Rate', value: c.exceptionRate + '%', target: '<3%', delta: deltaReverse(c.exceptionRate, p?.exceptionRate), nationalValue: n ? n.exceptionRate + '%' : null, tooltip: 'The frequency of shipments that encounter a \u201chiccup\u201d (damage, delays, or paperwork errors) requiring manual intervention by the ops team.' },
+    { title: 'First-Time-Right', value: c.firstTimeRight + '%', target: '>90%', delta: delta(c.firstTimeRight, p?.firstTimeRight), nationalValue: n ? n.firstTimeRight + '%' : null, tooltip: 'The percentage of loads that move from tender to final invoice with zero manual corrections; the gold standard for operational efficiency.' },
+    { title: 'Dwell Time (Origin/Dest)', value: c.dwellTime + ' hrs', target: '<2 hrs', delta: deltaReverse(c.dwellTime, p?.dwellTime), nationalValue: n ? n.dwellTime + ' hrs' : null, tooltip: 'The amount of time a carrier spends sitting at a shipper or receiver facility; high dwell times lead to detention costs and sour carrier relationships.' },
   ]
 })
 
@@ -248,6 +254,24 @@ const insights = computed(() => {
       text: `Exception rate spiked to ${worstException.exceptionRate}% in ${fmtMonth(worstException.month)} with first-time-right at just ${worstException.firstTimeRight}%, signaling process breakdowns that increase handling costs and rework.`,
     },
   ]
+})
+
+// Heatmap rows — one per region + national, using current period filter
+const heatmapRows = computed(() => {
+  const regions = ['National', 'East', 'Central', 'West']
+  return regions.map(region => {
+    const source = region === 'National'
+      ? nationalData.value
+      : regionDataFor(region)
+    let row: MonthData
+    if (isYearSelection.value) {
+      const filtered = source.filter(d => d.month.startsWith(selectedYear.value!))
+      row = avg(filtered)
+    } else {
+      row = source.find(d => d.month === selectedMonth.value)!
+    }
+    return { region, ...row }
+  })
 })
 </script>
 
@@ -334,7 +358,13 @@ const insights = computed(() => {
             md="4"
             lg
           >
-            <v-card variant="outlined" class="text-center financial-card" rounded="lg">
+            <v-card variant="outlined" class="text-center financial-card" rounded="lg" style="position: relative">
+              <v-tooltip v-if="card.tooltip" location="top" max-width="280">
+                <template #activator="{ props: tooltipProps }">
+                  <v-icon v-bind="tooltipProps" size="14" color="grey" style="position: absolute; top: 8px; right: 8px; cursor: pointer">mdi-information-outline</v-icon>
+                </template>
+                {{ card.tooltip }}
+              </v-tooltip>
               <v-card-item>
                 <v-card-subtitle class="font-weight-medium">{{ card.title }}</v-card-subtitle>
                 <v-card-title class="d-flex align-center justify-center">
@@ -370,7 +400,13 @@ const insights = computed(() => {
             sm="6"
             md="3"
           >
-            <v-card variant="outlined" class="text-center financial-card" rounded="lg">
+            <v-card variant="outlined" class="text-center financial-card" rounded="lg" style="position: relative">
+              <v-tooltip v-if="card.tooltip" location="top" max-width="280">
+                <template #activator="{ props: tooltipProps }">
+                  <v-icon v-bind="tooltipProps" size="14" color="grey" style="position: absolute; top: 8px; right: 8px; cursor: pointer">mdi-information-outline</v-icon>
+                </template>
+                {{ card.tooltip }}
+              </v-tooltip>
               <v-card-item>
                 <v-card-subtitle class="font-weight-medium">{{ card.title }}</v-card-subtitle>
                 <v-card-title class="d-flex align-center justify-center">
@@ -439,6 +475,16 @@ const insights = computed(() => {
             </v-card>
           </v-col>
         </v-row>
+
+        <!-- Performance Heatmap (National view only) -->
+        <template v-if="!isRegionSelected">
+          <v-label class="text-h6 font-weight-bold text-grey-darken-2 mt-8 mb-3">Regional Performance Heatmap</v-label>
+          <v-card variant="outlined" rounded="lg">
+            <v-card-text>
+              <PerformanceHeatmap :rows="heatmapRows" />
+            </v-card-text>
+          </v-card>
+        </template>
       </v-container>
     </v-main>
   </v-app>
