@@ -24,6 +24,19 @@ const props = defineProps<{
   highlightedMonth?: string
 }>()
 
+const emit = defineEmits<{
+  (e: 'select-month', month: string): void
+}>()
+
+function onChartClick(_event: any, elements: any[]) {
+  if (elements.length > 0) {
+    const idx = elements[0].index
+    if (idx >= 0 && idx < props.data.length) {
+      emit('select-month', props.data[idx].month)
+    }
+  }
+}
+
 const chartData = computed(() => {
   const highlightIdx = props.highlightedMonth && props.highlightedMonth !== 'all'
     ? props.data.findIndex(d => d.month === props.highlightedMonth)
@@ -58,6 +71,7 @@ const chartData = computed(() => {
 const chartOptions = {
   responsive: true,
   maintainAspectRatio: false,
+  onClick: onChartClick,
   plugins: {
     legend: { display: true, position: 'bottom' as const },
     title: { display: false },

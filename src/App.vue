@@ -94,6 +94,10 @@ function chartForward() {
   chartOffset.value = Math.min(data.length - CHART_WINDOW, chartOffset.value + 5)
 }
 
+function onChartSelectMonth(month: string) {
+  selectedMonth.value = month
+}
+
 // Reset offset when filter changes
 watch(selectedMonth, () => { initChartOffset() })
 
@@ -320,7 +324,7 @@ const insights = computed(() => {
                 </template>
               </v-card-item>
               <v-card-text>
-                <GrossMarginChart :data="chartData" :highlighted-month="selectedMonth" />
+                <GrossMarginChart :data="chartData" :highlighted-month="selectedMonth" @select-month="onChartSelectMonth" />
               </v-card-text>
             </v-card>
           </v-col>
@@ -340,7 +344,7 @@ const insights = computed(() => {
                 </template>
               </v-card-item>
               <v-card-text>
-                <ServiceChart :data="chartData" :highlighted-month="selectedMonth" />
+                <ServiceChart :data="chartData" :highlighted-month="selectedMonth" @select-month="onChartSelectMonth" />
               </v-card-text>
             </v-card>
           </v-col>
