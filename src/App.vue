@@ -194,7 +194,7 @@ const insights = computed(() => {
     <v-main>
       <v-container fluid class="pa-6">
         <!-- Financial Performance -->
-        <h2 class="text-h6 font-weight-bold text-grey-darken-2 mb-3">Financial Performance</h2>
+        <v-label class="text-h6 font-weight-bold text-grey-darken-2 mb-3">Financial Performance</v-label>
         <v-row>
           <v-col
             v-for="card in financialCards"
@@ -204,24 +204,26 @@ const insights = computed(() => {
             md="4"
             lg
           >
-            <v-card variant="outlined" class="pa-4 text-center" rounded="lg">
-              <div class="text-caption text-grey-darken-1 text-uppercase font-weight-medium">{{ card.title }}</div>
-              <div class="d-flex align-center justify-center mt-1">
-                <span class="text-h5 font-weight-bold">{{ card.value }}</span>
-                <v-icon
-                  v-if="card.delta"
-                  :color="card.delta.color"
-                  size="20"
-                  class="ml-2"
-                >{{ card.delta.icon }}</v-icon>
-              </div>
-              <div class="text-caption text-grey mt-1">Target: {{ card.target }}</div>
+            <v-card variant="outlined" class="text-center" rounded="lg">
+              <v-card-item>
+                <v-card-subtitle class="text-uppercase font-weight-medium">{{ card.title }}</v-card-subtitle>
+                <v-card-title class="d-flex align-center justify-center">
+                  <span class="text-h5 font-weight-bold">{{ card.value }}</span>
+                  <v-icon
+                    v-if="card.delta"
+                    :color="card.delta.color"
+                    size="20"
+                    class="ml-2"
+                  >{{ card.delta.icon }}</v-icon>
+                </v-card-title>
+              </v-card-item>
+              <v-card-text class="text-caption text-grey pt-0">Target: {{ card.target }}</v-card-text>
             </v-card>
           </v-col>
         </v-row>
 
         <!-- Service Reliability -->
-        <h2 class="text-h6 font-weight-bold text-grey-darken-2 mt-8 mb-3">Service Reliability</h2>
+        <v-label class="text-h6 font-weight-bold text-grey-darken-2 mt-8 mb-3">Service Reliability</v-label>
         <v-row>
           <v-col
             v-for="card in serviceCards"
@@ -230,18 +232,20 @@ const insights = computed(() => {
             sm="6"
             md="3"
           >
-            <v-card variant="outlined" class="pa-4 text-center" rounded="lg">
-              <div class="text-caption text-grey-darken-1 text-uppercase font-weight-medium">{{ card.title }}</div>
-              <div class="d-flex align-center justify-center mt-1">
-                <span class="text-h5 font-weight-bold">{{ card.value }}</span>
-                <v-icon
-                  v-if="card.delta"
-                  :color="card.delta.color"
-                  size="20"
-                  class="ml-2"
-                >{{ card.delta.icon }}</v-icon>
-              </div>
-              <div class="text-caption text-grey mt-1">Target: {{ card.target }}</div>
+            <v-card variant="outlined" class="text-center" rounded="lg">
+              <v-card-item>
+                <v-card-subtitle class="text-uppercase font-weight-medium">{{ card.title }}</v-card-subtitle>
+                <v-card-title class="d-flex align-center justify-center">
+                  <span class="text-h5 font-weight-bold">{{ card.value }}</span>
+                  <v-icon
+                    v-if="card.delta"
+                    :color="card.delta.color"
+                    size="20"
+                    class="ml-2"
+                  >{{ card.delta.icon }}</v-icon>
+                </v-card-title>
+              </v-card-item>
+              <v-card-text class="text-caption text-grey pt-0">Target: {{ card.target }}</v-card-text>
             </v-card>
           </v-col>
         </v-row>
@@ -249,21 +253,29 @@ const insights = computed(() => {
         <!-- Charts -->
         <v-row class="mt-8">
           <v-col cols="12" md="6">
-            <v-card variant="outlined" class="pa-4" rounded="lg">
-              <div class="text-subtitle-1 font-weight-bold text-grey-darken-2 mb-3">Gross Margin Over Time</div>
-              <GrossMarginChart :data="filteredData" :highlighted-month="selectedMonth" />
+            <v-card variant="outlined" rounded="lg">
+              <v-card-item>
+                <v-card-title class="text-subtitle-1 font-weight-bold text-grey-darken-2">Gross Margin Over Time</v-card-title>
+              </v-card-item>
+              <v-card-text>
+                <GrossMarginChart :data="filteredData" :highlighted-month="selectedMonth" />
+              </v-card-text>
             </v-card>
           </v-col>
           <v-col cols="12" md="6">
-            <v-card variant="outlined" class="pa-4" rounded="lg">
-              <div class="text-subtitle-1 font-weight-bold text-grey-darken-2 mb-3">On-Time Delivery & Dwell Time</div>
-              <ServiceChart :data="filteredData" :highlighted-month="selectedMonth" />
+            <v-card variant="outlined" rounded="lg">
+              <v-card-item>
+                <v-card-title class="text-subtitle-1 font-weight-bold text-grey-darken-2">On-Time Delivery & Dwell Time</v-card-title>
+              </v-card-item>
+              <v-card-text>
+                <ServiceChart :data="filteredData" :highlighted-month="selectedMonth" />
+              </v-card-text>
             </v-card>
           </v-col>
         </v-row>
 
         <!-- Performance Snapshot -->
-        <h2 class="text-h6 font-weight-bold text-grey-darken-2 mt-8 mb-3">Performance Snapshot</h2>
+        <v-label class="text-h6 font-weight-bold text-grey-darken-2 mt-8 mb-3">Performance Snapshot</v-label>
         <v-card variant="outlined" rounded="lg">
           <v-list lines="three">
             <v-list-item
