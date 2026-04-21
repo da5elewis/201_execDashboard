@@ -9,7 +9,42 @@
     "onTimeDelivery": 96.1,
     "exceptionRate": 2.4,
     "firstTimeRight": 92.5,
-    "dwellTime": 1.7
+    "dwellTime": 1.7,
+    "regions": {
+      "West": {
+        "grossMargin": 15.8,
+        "netMargin": 13.4,
+        "accessorialRecovery": 89.7,
+        "buyRateVariance": 1.9,
+        "revenueQualityRPM": 2.66,
+        "onTimeDelivery": 96.2,
+        "exceptionRate": 2.6,
+        "firstTimeRight": 93.3,
+        "dwellTime": 1.5
+      },
+      "Central": {
+        "grossMargin": 15.5,
+        "netMargin": 12.1,
+        "accessorialRecovery": 88.1,
+        "buyRateVariance": 2.9,
+        "revenueQualityRPM": 2.58,
+        "onTimeDelivery": 95.3,
+        "exceptionRate": 2.3,
+        "firstTimeRight": 91.5,
+        "dwellTime": 1.7
+      },
+      "East": {
+        "grossMargin": 14.1,
+        "netMargin": 12.6,
+        "accessorialRecovery": 85.5,
+        "buyRateVariance": 2.5,
+        "revenueQualityRPM": 2.58,
+        "onTimeDelivery": 93.6,
+        "exceptionRate": 3.1,
+        "firstTimeRight": 90.2,
+        "dwellTime": 2.3
+      }
+    }
   },
   {
     "month": "2024-02",
@@ -21,7 +56,42 @@
     "onTimeDelivery": 95.8,
     "exceptionRate": 2.6,
     "firstTimeRight": 91.8,
-    "dwellTime": 1.8
+    "dwellTime": 1.8,
+    "regions": {
+      "West": {
+        "grossMargin": 16.5,
+        "netMargin": 12.8,
+        "accessorialRecovery": 87.4,
+        "buyRateVariance": 1.2,
+        "revenueQualityRPM": 2.51,
+        "onTimeDelivery": 95.5,
+        "exceptionRate": 2.8,
+        "firstTimeRight": 93.4,
+        "dwellTime": 1.8
+      },
+      "Central": {
+        "grossMargin": 15.7,
+        "netMargin": 12.6,
+        "accessorialRecovery": 86.2,
+        "buyRateVariance": 0.9,
+        "revenueQualityRPM": 2.51,
+        "onTimeDelivery": 95,
+        "exceptionRate": 2.5,
+        "firstTimeRight": 91.8,
+        "dwellTime": 1.8
+      },
+      "East": {
+        "grossMargin": 13.5,
+        "netMargin": 11.5,
+        "accessorialRecovery": 82.4,
+        "buyRateVariance": 0.5,
+        "revenueQualityRPM": 2.4,
+        "onTimeDelivery": 93.7,
+        "exceptionRate": 2.5,
+        "firstTimeRight": 92.1,
+        "dwellTime": 2.1
+      }
+    }
   },
   {
     "month": "2024-03",
@@ -33,7 +103,42 @@
     "onTimeDelivery": 96.5,
     "exceptionRate": 1.9,
     "firstTimeRight": 93.1,
-    "dwellTime": 1.5
+    "dwellTime": 1.5,
+    "regions": {
+      "West": {
+        "grossMargin": 16.9,
+        "netMargin": 15,
+        "accessorialRecovery": 89.9,
+        "buyRateVariance": 0.3,
+        "revenueQualityRPM": 2.72,
+        "onTimeDelivery": 97.3,
+        "exceptionRate": 2.1,
+        "firstTimeRight": 93.3,
+        "dwellTime": 1.4
+      },
+      "Central": {
+        "grossMargin": 16.7,
+        "netMargin": 13.2,
+        "accessorialRecovery": 89.3,
+        "buyRateVariance": -1.8,
+        "revenueQualityRPM": 2.76,
+        "onTimeDelivery": 97,
+        "exceptionRate": 1.6,
+        "firstTimeRight": 91.7,
+        "dwellTime": 1.4
+      },
+      "East": {
+        "grossMargin": 16.4,
+        "netMargin": 12.2,
+        "accessorialRecovery": 85.5,
+        "buyRateVariance": -1.6,
+        "revenueQualityRPM": 2.63,
+        "onTimeDelivery": 94.1,
+        "exceptionRate": 3.3,
+        "firstTimeRight": 91.5,
+        "dwellTime": 2
+      }
+    }
   },
   {
     "month": "2024-04",
@@ -45,7 +150,42 @@
     "onTimeDelivery": 94.2,
     "exceptionRate": 3.2,
     "firstTimeRight": 89.7,
-    "dwellTime": 2.1
+    "dwellTime": 2.1,
+    "regions": {
+      "West": {
+        "grossMargin": 15.1,
+        "netMargin": 12.5,
+        "accessorialRecovery": 86.4,
+        "buyRateVariance": -3,
+        "revenueQualityRPM": 2.55,
+        "onTimeDelivery": 95.7,
+        "exceptionRate": 2.8,
+        "firstTimeRight": 91.5,
+        "dwellTime": 1.8
+      },
+      "Central": {
+        "grossMargin": 15.3,
+        "netMargin": 12.1,
+        "accessorialRecovery": 83.8,
+        "buyRateVariance": -3.5,
+        "revenueQualityRPM": 2.53,
+        "onTimeDelivery": 94.1,
+        "exceptionRate": 3.1,
+        "firstTimeRight": 89,
+        "dwellTime": 2.1
+      },
+      "East": {
+        "grossMargin": 13.7,
+        "netMargin": 10.8,
+        "accessorialRecovery": 82,
+        "buyRateVariance": -5.8,
+        "revenueQualityRPM": 2.38,
+        "onTimeDelivery": 92.9,
+        "exceptionRate": 3,
+        "firstTimeRight": 89.1,
+        "dwellTime": 2.3
+      }
+    }
   },
   {
     "month": "2024-05",
@@ -57,7 +197,42 @@
     "onTimeDelivery": 95.3,
     "exceptionRate": 2.8,
     "firstTimeRight": 90.4,
-    "dwellTime": 1.9
+    "dwellTime": 1.9,
+    "regions": {
+      "West": {
+        "grossMargin": 16.1,
+        "netMargin": 13.6,
+        "accessorialRecovery": 85.9,
+        "buyRateVariance": -0.9,
+        "revenueQualityRPM": 2.56,
+        "onTimeDelivery": 95.8,
+        "exceptionRate": 2.1,
+        "firstTimeRight": 90.9,
+        "dwellTime": 1.8
+      },
+      "Central": {
+        "grossMargin": 16.1,
+        "netMargin": 11.2,
+        "accessorialRecovery": 85.5,
+        "buyRateVariance": -0.6,
+        "revenueQualityRPM": 2.52,
+        "onTimeDelivery": 94.2,
+        "exceptionRate": 2.8,
+        "firstTimeRight": 89.2,
+        "dwellTime": 2.2
+      },
+      "East": {
+        "grossMargin": 14,
+        "netMargin": 10.3,
+        "accessorialRecovery": 84.4,
+        "buyRateVariance": -2.6,
+        "revenueQualityRPM": 2.36,
+        "onTimeDelivery": 93.8,
+        "exceptionRate": 3.1,
+        "firstTimeRight": 89.5,
+        "dwellTime": 2
+      }
+    }
   },
   {
     "month": "2024-06",
@@ -66,10 +241,45 @@
     "accessorialRecovery": 89.4,
     "buyRateVariance": 3.6,
     "revenueQualityRPM": 2.68,
-    "onTimeDelivery": 97.0,
+    "onTimeDelivery": 97,
     "exceptionRate": 1.7,
     "firstTimeRight": 93.8,
-    "dwellTime": 1.4
+    "dwellTime": 1.4,
+    "regions": {
+      "West": {
+        "grossMargin": 17,
+        "netMargin": 14.7,
+        "accessorialRecovery": 89.7,
+        "buyRateVariance": 4.6,
+        "revenueQualityRPM": 2.76,
+        "onTimeDelivery": 98.3,
+        "exceptionRate": 0.8,
+        "firstTimeRight": 94.3,
+        "dwellTime": 1
+      },
+      "Central": {
+        "grossMargin": 16.1,
+        "netMargin": 12.5,
+        "accessorialRecovery": 90.7,
+        "buyRateVariance": 3.9,
+        "revenueQualityRPM": 2.68,
+        "onTimeDelivery": 96.8,
+        "exceptionRate": 1.8,
+        "firstTimeRight": 93.2,
+        "dwellTime": 1.4
+      },
+      "East": {
+        "grossMargin": 15.3,
+        "netMargin": 12,
+        "accessorialRecovery": 87,
+        "buyRateVariance": 2.2,
+        "revenueQualityRPM": 2.54,
+        "onTimeDelivery": 94.6,
+        "exceptionRate": 2.7,
+        "firstTimeRight": 92.3,
+        "dwellTime": 1.3
+      }
+    }
   },
   {
     "month": "2024-07",
@@ -79,9 +289,44 @@
     "buyRateVariance": 4.1,
     "revenueQualityRPM": 2.74,
     "onTimeDelivery": 96.8,
-    "exceptionRate": 2.0,
+    "exceptionRate": 2,
     "firstTimeRight": 94.2,
-    "dwellTime": 1.3
+    "dwellTime": 1.3,
+    "regions": {
+      "West": {
+        "grossMargin": 17.9,
+        "netMargin": 14.6,
+        "accessorialRecovery": 90.5,
+        "buyRateVariance": 5.7,
+        "revenueQualityRPM": 2.92,
+        "onTimeDelivery": 98.4,
+        "exceptionRate": 1.9,
+        "firstTimeRight": 94.5,
+        "dwellTime": 1.1
+      },
+      "Central": {
+        "grossMargin": 16.7,
+        "netMargin": 14.4,
+        "accessorialRecovery": 91,
+        "buyRateVariance": 5.1,
+        "revenueQualityRPM": 2.69,
+        "onTimeDelivery": 96.9,
+        "exceptionRate": 2.3,
+        "firstTimeRight": 94.8,
+        "dwellTime": 1.2
+      },
+      "East": {
+        "grossMargin": 16.9,
+        "netMargin": 14.1,
+        "accessorialRecovery": 90.6,
+        "buyRateVariance": 2,
+        "revenueQualityRPM": 2.6,
+        "onTimeDelivery": 94.2,
+        "exceptionRate": 2.7,
+        "firstTimeRight": 92,
+        "dwellTime": 1.6
+      }
+    }
   },
   {
     "month": "2024-08",
@@ -93,11 +338,46 @@
     "onTimeDelivery": 93.1,
     "exceptionRate": 3.5,
     "firstTimeRight": 88.9,
-    "dwellTime": 2.3
+    "dwellTime": 2.3,
+    "regions": {
+      "West": {
+        "grossMargin": 15.1,
+        "netMargin": 13,
+        "accessorialRecovery": 85,
+        "buyRateVariance": -5,
+        "revenueQualityRPM": 2.5,
+        "onTimeDelivery": 94.3,
+        "exceptionRate": 3,
+        "firstTimeRight": 90.6,
+        "dwellTime": 2.1
+      },
+      "Central": {
+        "grossMargin": 14.8,
+        "netMargin": 11.9,
+        "accessorialRecovery": 85.8,
+        "buyRateVariance": -4.9,
+        "revenueQualityRPM": 2.43,
+        "onTimeDelivery": 91.9,
+        "exceptionRate": 3.9,
+        "firstTimeRight": 87.8,
+        "dwellTime": 2.4
+      },
+      "East": {
+        "grossMargin": 14.3,
+        "netMargin": 10.6,
+        "accessorialRecovery": 82,
+        "buyRateVariance": -6.5,
+        "revenueQualityRPM": 2.45,
+        "onTimeDelivery": 91.8,
+        "exceptionRate": 4.3,
+        "firstTimeRight": 87.7,
+        "dwellTime": 2.3
+      }
+    }
   },
   {
     "month": "2024-09",
-    "grossMargin": 16.0,
+    "grossMargin": 16,
     "netMargin": 12.6,
     "accessorialRecovery": 86.8,
     "buyRateVariance": -0.3,
@@ -105,7 +385,42 @@
     "onTimeDelivery": 95.6,
     "exceptionRate": 2.5,
     "firstTimeRight": 91.3,
-    "dwellTime": 1.8
+    "dwellTime": 1.8,
+    "regions": {
+      "West": {
+        "grossMargin": 17.1,
+        "netMargin": 13.6,
+        "accessorialRecovery": 86.9,
+        "buyRateVariance": 1.1,
+        "revenueQualityRPM": 2.59,
+        "onTimeDelivery": 95.4,
+        "exceptionRate": 2,
+        "firstTimeRight": 92.6,
+        "dwellTime": 1.9
+      },
+      "Central": {
+        "grossMargin": 15.9,
+        "netMargin": 11.8,
+        "accessorialRecovery": 87,
+        "buyRateVariance": -0.8,
+        "revenueQualityRPM": 2.56,
+        "onTimeDelivery": 95.1,
+        "exceptionRate": 2.5,
+        "firstTimeRight": 91.8,
+        "dwellTime": 2.1
+      },
+      "East": {
+        "grossMargin": 16,
+        "netMargin": 11.8,
+        "accessorialRecovery": 82.6,
+        "buyRateVariance": -0.3,
+        "revenueQualityRPM": 2.41,
+        "onTimeDelivery": 94.8,
+        "exceptionRate": 2.3,
+        "firstTimeRight": 90,
+        "dwellTime": 2.2
+      }
+    }
   },
   {
     "month": "2024-10",
@@ -117,7 +432,42 @@
     "onTimeDelivery": 97.3,
     "exceptionRate": 1.5,
     "firstTimeRight": 94.7,
-    "dwellTime": 1.2
+    "dwellTime": 1.2,
+    "regions": {
+      "West": {
+        "grossMargin": 20,
+        "netMargin": 14.5,
+        "accessorialRecovery": 94.5,
+        "buyRateVariance": 6.7,
+        "revenueQualityRPM": 2.88,
+        "onTimeDelivery": 98,
+        "exceptionRate": 1.6,
+        "firstTimeRight": 94.5,
+        "dwellTime": 0.8
+      },
+      "Central": {
+        "grossMargin": 18.1,
+        "netMargin": 14.2,
+        "accessorialRecovery": 90.9,
+        "buyRateVariance": 4.7,
+        "revenueQualityRPM": 2.82,
+        "onTimeDelivery": 97.3,
+        "exceptionRate": 1.7,
+        "firstTimeRight": 93.5,
+        "dwellTime": 1.5
+      },
+      "East": {
+        "grossMargin": 18,
+        "netMargin": 14.3,
+        "accessorialRecovery": 89.2,
+        "buyRateVariance": 2.5,
+        "revenueQualityRPM": 2.69,
+        "onTimeDelivery": 97.5,
+        "exceptionRate": 2.9,
+        "firstTimeRight": 93.2,
+        "dwellTime": 1.4
+      }
+    }
   },
   {
     "month": "2024-11",
@@ -129,19 +479,89 @@
     "onTimeDelivery": 92.8,
     "exceptionRate": 3.8,
     "firstTimeRight": 88.1,
-    "dwellTime": 2.4
+    "dwellTime": 2.4,
+    "regions": {
+      "West": {
+        "grossMargin": 16.6,
+        "netMargin": 12.4,
+        "accessorialRecovery": 83.4,
+        "buyRateVariance": -5.2,
+        "revenueQualityRPM": 2.4,
+        "onTimeDelivery": 94.4,
+        "exceptionRate": 3.5,
+        "firstTimeRight": 89.7,
+        "dwellTime": 2.4
+      },
+      "Central": {
+        "grossMargin": 15.1,
+        "netMargin": 10.5,
+        "accessorialRecovery": 82,
+        "buyRateVariance": -6.4,
+        "revenueQualityRPM": 2.36,
+        "onTimeDelivery": 92,
+        "exceptionRate": 3.8,
+        "firstTimeRight": 88.3,
+        "dwellTime": 2.6
+      },
+      "East": {
+        "grossMargin": 12.8,
+        "netMargin": 10.1,
+        "accessorialRecovery": 81.8,
+        "buyRateVariance": -5.5,
+        "revenueQualityRPM": 2.32,
+        "onTimeDelivery": 92.5,
+        "exceptionRate": 4.9,
+        "firstTimeRight": 86.2,
+        "dwellTime": 2.5
+      }
+    }
   },
   {
     "month": "2024-12",
     "grossMargin": 15.6,
-    "netMargin": 12.0,
+    "netMargin": 12,
     "accessorialRecovery": 85.3,
-    "buyRateVariance": -2.0,
+    "buyRateVariance": -2,
     "revenueQualityRPM": 2.51,
     "onTimeDelivery": 94.9,
     "exceptionRate": 2.9,
     "firstTimeRight": 90.6,
-    "dwellTime": 2.0
+    "dwellTime": 2,
+    "regions": {
+      "West": {
+        "grossMargin": 16.8,
+        "netMargin": 12.1,
+        "accessorialRecovery": 86.3,
+        "buyRateVariance": -2.3,
+        "revenueQualityRPM": 2.62,
+        "onTimeDelivery": 94.8,
+        "exceptionRate": 2.6,
+        "firstTimeRight": 91.1,
+        "dwellTime": 1.6
+      },
+      "Central": {
+        "grossMargin": 15.5,
+        "netMargin": 11.7,
+        "accessorialRecovery": 84.6,
+        "buyRateVariance": -1.2,
+        "revenueQualityRPM": 2.4,
+        "onTimeDelivery": 93.7,
+        "exceptionRate": 2.8,
+        "firstTimeRight": 90.8,
+        "dwellTime": 2.3
+      },
+      "East": {
+        "grossMargin": 14.6,
+        "netMargin": 10,
+        "accessorialRecovery": 84.8,
+        "buyRateVariance": -3.2,
+        "revenueQualityRPM": 2.31,
+        "onTimeDelivery": 92.7,
+        "exceptionRate": 3.3,
+        "firstTimeRight": 88,
+        "dwellTime": 2.1
+      }
+    }
   },
   {
     "month": "2025-01",
@@ -152,20 +572,90 @@
     "revenueQualityRPM": 2.63,
     "onTimeDelivery": 96.2,
     "exceptionRate": 2.2,
-    "firstTimeRight": 92.0,
-    "dwellTime": 1.6
+    "firstTimeRight": 92,
+    "dwellTime": 1.6,
+    "regions": {
+      "West": {
+        "grossMargin": 17.6,
+        "netMargin": 12.9,
+        "accessorialRecovery": 87.3,
+        "buyRateVariance": 2.9,
+        "revenueQualityRPM": 2.77,
+        "onTimeDelivery": 96.1,
+        "exceptionRate": 2.3,
+        "firstTimeRight": 92.9,
+        "dwellTime": 1.4
+      },
+      "Central": {
+        "grossMargin": 16.7,
+        "netMargin": 13.6,
+        "accessorialRecovery": 86.5,
+        "buyRateVariance": 2.1,
+        "revenueQualityRPM": 2.57,
+        "onTimeDelivery": 96.1,
+        "exceptionRate": 2.5,
+        "firstTimeRight": 91,
+        "dwellTime": 1.6
+      },
+      "East": {
+        "grossMargin": 15.5,
+        "netMargin": 12.2,
+        "accessorialRecovery": 84.5,
+        "buyRateVariance": 1.6,
+        "revenueQualityRPM": 2.49,
+        "onTimeDelivery": 95,
+        "exceptionRate": 2.8,
+        "firstTimeRight": 90.3,
+        "dwellTime": 2.1
+      }
+    }
   },
   {
     "month": "2025-02",
-    "grossMargin": 17.0,
+    "grossMargin": 17,
     "netMargin": 13.5,
     "accessorialRecovery": 89.1,
     "buyRateVariance": 2.9,
-    "revenueQualityRPM": 2.70,
+    "revenueQualityRPM": 2.7,
     "onTimeDelivery": 96.7,
     "exceptionRate": 1.8,
     "firstTimeRight": 93.4,
-    "dwellTime": 1.4
+    "dwellTime": 1.4,
+    "regions": {
+      "West": {
+        "grossMargin": 18.5,
+        "netMargin": 14.8,
+        "accessorialRecovery": 90.3,
+        "buyRateVariance": 3.2,
+        "revenueQualityRPM": 2.74,
+        "onTimeDelivery": 96.7,
+        "exceptionRate": 1.3,
+        "firstTimeRight": 94.7,
+        "dwellTime": 1.5
+      },
+      "Central": {
+        "grossMargin": 17.5,
+        "netMargin": 13.6,
+        "accessorialRecovery": 88.9,
+        "buyRateVariance": 1.5,
+        "revenueQualityRPM": 2.77,
+        "onTimeDelivery": 96.6,
+        "exceptionRate": 1.6,
+        "firstTimeRight": 93.7,
+        "dwellTime": 1.4
+      },
+      "East": {
+        "grossMargin": 15.8,
+        "netMargin": 11.8,
+        "accessorialRecovery": 85.3,
+        "buyRateVariance": 1.4,
+        "revenueQualityRPM": 2.72,
+        "onTimeDelivery": 96.3,
+        "exceptionRate": 2.7,
+        "firstTimeRight": 92.9,
+        "dwellTime": 1.6
+      }
+    }
   },
   {
     "month": "2025-03",
@@ -177,7 +667,42 @@
     "onTimeDelivery": 91.5,
     "exceptionRate": 4.1,
     "firstTimeRight": 87.3,
-    "dwellTime": 2.5
+    "dwellTime": 2.5,
+    "regions": {
+      "West": {
+        "grossMargin": 15,
+        "netMargin": 11.6,
+        "accessorialRecovery": 83.8,
+        "buyRateVariance": -5.9,
+        "revenueQualityRPM": 2.53,
+        "onTimeDelivery": 92.5,
+        "exceptionRate": 3.3,
+        "firstTimeRight": 87.5,
+        "dwellTime": 2.5
+      },
+      "Central": {
+        "grossMargin": 13.8,
+        "netMargin": 11.4,
+        "accessorialRecovery": 83,
+        "buyRateVariance": -4.9,
+        "revenueQualityRPM": 2.34,
+        "onTimeDelivery": 90.9,
+        "exceptionRate": 4,
+        "firstTimeRight": 87.2,
+        "dwellTime": 2.8
+      },
+      "East": {
+        "grossMargin": 14,
+        "netMargin": 10.8,
+        "accessorialRecovery": 79,
+        "buyRateVariance": -8,
+        "revenueQualityRPM": 2.21,
+        "onTimeDelivery": 89.8,
+        "exceptionRate": 5,
+        "firstTimeRight": 87,
+        "dwellTime": 2.9
+      }
+    }
   },
   {
     "month": "2025-04",
@@ -189,31 +714,136 @@
     "onTimeDelivery": 95.4,
     "exceptionRate": 2.7,
     "firstTimeRight": 91.1,
-    "dwellTime": 1.9
+    "dwellTime": 1.9,
+    "regions": {
+      "West": {
+        "grossMargin": 17.4,
+        "netMargin": 12.5,
+        "accessorialRecovery": 88.5,
+        "buyRateVariance": 0.8,
+        "revenueQualityRPM": 2.53,
+        "onTimeDelivery": 95.9,
+        "exceptionRate": 2.1,
+        "firstTimeRight": 92.7,
+        "dwellTime": 1.8
+      },
+      "Central": {
+        "grossMargin": 15.2,
+        "netMargin": 12,
+        "accessorialRecovery": 87.9,
+        "buyRateVariance": -0.2,
+        "revenueQualityRPM": 2.52,
+        "onTimeDelivery": 95.1,
+        "exceptionRate": 2.4,
+        "firstTimeRight": 89.8,
+        "dwellTime": 1.8
+      },
+      "East": {
+        "grossMargin": 15.7,
+        "netMargin": 12.1,
+        "accessorialRecovery": 83.6,
+        "buyRateVariance": -3.2,
+        "revenueQualityRPM": 2.32,
+        "onTimeDelivery": 93.3,
+        "exceptionRate": 2.9,
+        "firstTimeRight": 90.2,
+        "dwellTime": 2.5
+      }
+    }
   },
   {
     "month": "2025-05",
     "grossMargin": 17.8,
-    "netMargin": 14.0,
+    "netMargin": 14,
     "accessorialRecovery": 90.8,
     "buyRateVariance": 3.3,
     "revenueQualityRPM": 2.77,
     "onTimeDelivery": 97.1,
     "exceptionRate": 1.6,
     "firstTimeRight": 94.5,
-    "dwellTime": 1.3
+    "dwellTime": 1.3,
+    "regions": {
+      "West": {
+        "grossMargin": 18.4,
+        "netMargin": 14.5,
+        "accessorialRecovery": 93.4,
+        "buyRateVariance": 2.5,
+        "revenueQualityRPM": 2.96,
+        "onTimeDelivery": 97.3,
+        "exceptionRate": 1.6,
+        "firstTimeRight": 95.4,
+        "dwellTime": 0.9
+      },
+      "Central": {
+        "grossMargin": 16.7,
+        "netMargin": 13.9,
+        "accessorialRecovery": 90.6,
+        "buyRateVariance": 3.1,
+        "revenueQualityRPM": 2.68,
+        "onTimeDelivery": 97.8,
+        "exceptionRate": 2.1,
+        "firstTimeRight": 94.8,
+        "dwellTime": 1.6
+      },
+      "East": {
+        "grossMargin": 16.8,
+        "netMargin": 12.6,
+        "accessorialRecovery": 87.4,
+        "buyRateVariance": 0.9,
+        "revenueQualityRPM": 2.81,
+        "onTimeDelivery": 95,
+        "exceptionRate": 2.9,
+        "firstTimeRight": 94.4,
+        "dwellTime": 1.6
+      }
+    }
   },
   {
     "month": "2025-06",
     "grossMargin": 16.5,
-    "netMargin": 13.0,
+    "netMargin": 13,
     "accessorialRecovery": 88.3,
     "buyRateVariance": 2.4,
     "revenueQualityRPM": 2.65,
-    "onTimeDelivery": 96.0,
+    "onTimeDelivery": 96,
     "exceptionRate": 2.3,
     "firstTimeRight": 92.7,
-    "dwellTime": 1.6
+    "dwellTime": 1.6,
+    "regions": {
+      "West": {
+        "grossMargin": 18.1,
+        "netMargin": 12.9,
+        "accessorialRecovery": 90.7,
+        "buyRateVariance": 2.2,
+        "revenueQualityRPM": 2.84,
+        "onTimeDelivery": 96.1,
+        "exceptionRate": 2.5,
+        "firstTimeRight": 92.6,
+        "dwellTime": 1.7
+      },
+      "Central": {
+        "grossMargin": 17.1,
+        "netMargin": 13.4,
+        "accessorialRecovery": 89,
+        "buyRateVariance": 3.3,
+        "revenueQualityRPM": 2.58,
+        "onTimeDelivery": 95.5,
+        "exceptionRate": 2.1,
+        "firstTimeRight": 91.5,
+        "dwellTime": 1.7
+      },
+      "East": {
+        "grossMargin": 16.4,
+        "netMargin": 12.7,
+        "accessorialRecovery": 84.4,
+        "buyRateVariance": 0.5,
+        "revenueQualityRPM": 2.66,
+        "onTimeDelivery": 94,
+        "exceptionRate": 2.7,
+        "firstTimeRight": 92.3,
+        "dwellTime": 1.8
+      }
+    }
   },
   {
     "month": "2025-07",
@@ -225,19 +855,89 @@
     "onTimeDelivery": 93.6,
     "exceptionRate": 3.3,
     "firstTimeRight": 89.2,
-    "dwellTime": 2.2
+    "dwellTime": 2.2,
+    "regions": {
+      "West": {
+        "grossMargin": 15.3,
+        "netMargin": 12.3,
+        "accessorialRecovery": 84,
+        "buyRateVariance": -4,
+        "revenueQualityRPM": 2.67,
+        "onTimeDelivery": 94.2,
+        "exceptionRate": 2.6,
+        "firstTimeRight": 90.3,
+        "dwellTime": 2.2
+      },
+      "Central": {
+        "grossMargin": 15.1,
+        "netMargin": 11.9,
+        "accessorialRecovery": 83.1,
+        "buyRateVariance": -3.8,
+        "revenueQualityRPM": 2.43,
+        "onTimeDelivery": 94.3,
+        "exceptionRate": 3.5,
+        "firstTimeRight": 88.8,
+        "dwellTime": 2.5
+      },
+      "East": {
+        "grossMargin": 13.9,
+        "netMargin": 11.8,
+        "accessorialRecovery": 80.9,
+        "buyRateVariance": -3.9,
+        "revenueQualityRPM": 2.23,
+        "onTimeDelivery": 93.3,
+        "exceptionRate": 3.5,
+        "firstTimeRight": 89.1,
+        "dwellTime": 2.4
+      }
+    }
   },
   {
     "month": "2025-08",
     "grossMargin": 18.1,
     "netMargin": 14.5,
-    "accessorialRecovery": 92.0,
+    "accessorialRecovery": 92,
     "buyRateVariance": 4.5,
     "revenueQualityRPM": 2.83,
     "onTimeDelivery": 97.5,
     "exceptionRate": 1.4,
-    "firstTimeRight": 95.0,
-    "dwellTime": 1.1
+    "firstTimeRight": 95,
+    "dwellTime": 1.1,
+    "regions": {
+      "West": {
+        "grossMargin": 17.9,
+        "netMargin": 14.9,
+        "accessorialRecovery": 94.5,
+        "buyRateVariance": 6.3,
+        "revenueQualityRPM": 2.87,
+        "onTimeDelivery": 98.9,
+        "exceptionRate": 0.7,
+        "firstTimeRight": 95.9,
+        "dwellTime": 1.1
+      },
+      "Central": {
+        "grossMargin": 17.7,
+        "netMargin": 14.8,
+        "accessorialRecovery": 92,
+        "buyRateVariance": 3.2,
+        "revenueQualityRPM": 2.84,
+        "onTimeDelivery": 98.1,
+        "exceptionRate": 1.7,
+        "firstTimeRight": 94,
+        "dwellTime": 1.3
+      },
+      "East": {
+        "grossMargin": 16.2,
+        "netMargin": 13.9,
+        "accessorialRecovery": 89.8,
+        "buyRateVariance": 3.8,
+        "revenueQualityRPM": 2.79,
+        "onTimeDelivery": 97.7,
+        "exceptionRate": 1.5,
+        "firstTimeRight": 92.6,
+        "dwellTime": 1.6
+      }
+    }
   },
   {
     "month": "2025-09",
@@ -248,8 +948,43 @@
     "revenueQualityRPM": 2.69,
     "onTimeDelivery": 96.4,
     "exceptionRate": 2.1,
-    "firstTimeRight": 93.0,
-    "dwellTime": 1.5
+    "firstTimeRight": 93,
+    "dwellTime": 1.5,
+    "regions": {
+      "West": {
+        "grossMargin": 18.2,
+        "netMargin": 13.7,
+        "accessorialRecovery": 89.8,
+        "buyRateVariance": 1.5,
+        "revenueQualityRPM": 2.84,
+        "onTimeDelivery": 97.6,
+        "exceptionRate": 2.3,
+        "firstTimeRight": 93.3,
+        "dwellTime": 1.4
+      },
+      "Central": {
+        "grossMargin": 17.3,
+        "netMargin": 12.6,
+        "accessorialRecovery": 88.2,
+        "buyRateVariance": 0.5,
+        "revenueQualityRPM": 2.63,
+        "onTimeDelivery": 96,
+        "exceptionRate": 1.9,
+        "firstTimeRight": 93.1,
+        "dwellTime": 1.4
+      },
+      "East": {
+        "grossMargin": 16.7,
+        "netMargin": 11.5,
+        "accessorialRecovery": 86.8,
+        "buyRateVariance": 1,
+        "revenueQualityRPM": 2.69,
+        "onTimeDelivery": 94.2,
+        "exceptionRate": 2.5,
+        "firstTimeRight": 90.6,
+        "dwellTime": 1.9
+      }
+    }
   },
   {
     "month": "2025-10",
@@ -261,19 +996,89 @@
     "onTimeDelivery": 92.4,
     "exceptionRate": 3.6,
     "firstTimeRight": 88.5,
-    "dwellTime": 2.3
+    "dwellTime": 2.3,
+    "regions": {
+      "West": {
+        "grossMargin": 14.7,
+        "netMargin": 11.1,
+        "accessorialRecovery": 83.5,
+        "buyRateVariance": -4.6,
+        "revenueQualityRPM": 2.6,
+        "onTimeDelivery": 92.3,
+        "exceptionRate": 2.7,
+        "firstTimeRight": 89.1,
+        "dwellTime": 2
+      },
+      "Central": {
+        "grossMargin": 15.1,
+        "netMargin": 11.1,
+        "accessorialRecovery": 83.1,
+        "buyRateVariance": -5.4,
+        "revenueQualityRPM": 2.35,
+        "onTimeDelivery": 93.2,
+        "exceptionRate": 4.1,
+        "firstTimeRight": 89,
+        "dwellTime": 2.4
+      },
+      "East": {
+        "grossMargin": 13.9,
+        "netMargin": 10.2,
+        "accessorialRecovery": 82.1,
+        "buyRateVariance": -6.2,
+        "revenueQualityRPM": 2.32,
+        "onTimeDelivery": 91.7,
+        "exceptionRate": 4.3,
+        "firstTimeRight": 86.7,
+        "dwellTime": 2.5
+      }
+    }
   },
   {
     "month": "2025-11",
     "grossMargin": 17.3,
     "netMargin": 13.7,
     "accessorialRecovery": 89.7,
-    "buyRateVariance": 3.0,
+    "buyRateVariance": 3,
     "revenueQualityRPM": 2.73,
     "onTimeDelivery": 96.9,
     "exceptionRate": 1.8,
     "firstTimeRight": 93.6,
-    "dwellTime": 1.4
+    "dwellTime": 1.4,
+    "regions": {
+      "West": {
+        "grossMargin": 18.5,
+        "netMargin": 13.4,
+        "accessorialRecovery": 91.2,
+        "buyRateVariance": 4.5,
+        "revenueQualityRPM": 2.86,
+        "onTimeDelivery": 97.7,
+        "exceptionRate": 1.9,
+        "firstTimeRight": 94.9,
+        "dwellTime": 1.2
+      },
+      "Central": {
+        "grossMargin": 16.5,
+        "netMargin": 13.8,
+        "accessorialRecovery": 90.5,
+        "buyRateVariance": 1.7,
+        "revenueQualityRPM": 2.66,
+        "onTimeDelivery": 96.9,
+        "exceptionRate": 2.1,
+        "firstTimeRight": 93,
+        "dwellTime": 1.6
+      },
+      "East": {
+        "grossMargin": 16.9,
+        "netMargin": 13.9,
+        "accessorialRecovery": 89.6,
+        "buyRateVariance": 3.6,
+        "revenueQualityRPM": 2.61,
+        "onTimeDelivery": 96.5,
+        "exceptionRate": 2.1,
+        "firstTimeRight": 93.1,
+        "dwellTime": 1.4
+      }
+    }
   },
   {
     "month": "2025-12",
@@ -285,7 +1090,42 @@
     "onTimeDelivery": 94.7,
     "exceptionRate": 2.9,
     "firstTimeRight": 90.8,
-    "dwellTime": 2.0
+    "dwellTime": 2,
+    "regions": {
+      "West": {
+        "grossMargin": 15.2,
+        "netMargin": 13.1,
+        "accessorialRecovery": 86.8,
+        "buyRateVariance": 0.3,
+        "revenueQualityRPM": 2.56,
+        "onTimeDelivery": 95.7,
+        "exceptionRate": 2.9,
+        "firstTimeRight": 91.7,
+        "dwellTime": 2
+      },
+      "Central": {
+        "grossMargin": 15.8,
+        "netMargin": 12.2,
+        "accessorialRecovery": 83.8,
+        "buyRateVariance": -0.8,
+        "revenueQualityRPM": 2.49,
+        "onTimeDelivery": 94.8,
+        "exceptionRate": 3.2,
+        "firstTimeRight": 90.3,
+        "dwellTime": 1.9
+      },
+      "East": {
+        "grossMargin": 13.7,
+        "netMargin": 12.2,
+        "accessorialRecovery": 85.4,
+        "buyRateVariance": -1.9,
+        "revenueQualityRPM": 2.32,
+        "onTimeDelivery": 92,
+        "exceptionRate": 3.1,
+        "firstTimeRight": 90.3,
+        "dwellTime": 1.9
+      }
+    }
   },
   {
     "month": "2026-01",
@@ -295,21 +1135,91 @@
     "buyRateVariance": 2.6,
     "revenueQualityRPM": 2.67,
     "onTimeDelivery": 96.3,
-    "exceptionRate": 2.0,
+    "exceptionRate": 2,
     "firstTimeRight": 92.9,
-    "dwellTime": 1.5
+    "dwellTime": 1.5,
+    "regions": {
+      "West": {
+        "grossMargin": 18.1,
+        "netMargin": 14.4,
+        "accessorialRecovery": 90,
+        "buyRateVariance": 3.2,
+        "revenueQualityRPM": 2.8,
+        "onTimeDelivery": 96.9,
+        "exceptionRate": 1.7,
+        "firstTimeRight": 92.8,
+        "dwellTime": 1.5
+      },
+      "Central": {
+        "grossMargin": 17.6,
+        "netMargin": 13.4,
+        "accessorialRecovery": 90,
+        "buyRateVariance": 2.9,
+        "revenueQualityRPM": 2.62,
+        "onTimeDelivery": 97.2,
+        "exceptionRate": 1.9,
+        "firstTimeRight": 93.7,
+        "dwellTime": 1.3
+      },
+      "East": {
+        "grossMargin": 15,
+        "netMargin": 12.6,
+        "accessorialRecovery": 87.9,
+        "buyRateVariance": 3.3,
+        "revenueQualityRPM": 2.62,
+        "onTimeDelivery": 94.5,
+        "exceptionRate": 3.3,
+        "firstTimeRight": 92,
+        "dwellTime": 1.4
+      }
+    }
   },
   {
     "month": "2026-02",
     "grossMargin": 14.5,
-    "netMargin": 11.0,
+    "netMargin": 11,
     "accessorialRecovery": 82.1,
     "buyRateVariance": -5.3,
-    "revenueQualityRPM": 2.40,
-    "onTimeDelivery": 84.0,
+    "revenueQualityRPM": 2.4,
+    "onTimeDelivery": 84,
     "exceptionRate": 4.3,
     "firstTimeRight": 87.6,
-    "dwellTime": 2.6
+    "dwellTime": 2.6,
+    "regions": {
+      "West": {
+        "grossMargin": 14.4,
+        "netMargin": 10.7,
+        "accessorialRecovery": 81.7,
+        "buyRateVariance": -3.4,
+        "revenueQualityRPM": 2.42,
+        "onTimeDelivery": 85.2,
+        "exceptionRate": 4.3,
+        "firstTimeRight": 87.5,
+        "dwellTime": 2.1
+      },
+      "Central": {
+        "grossMargin": 13.8,
+        "netMargin": 11.6,
+        "accessorialRecovery": 82.2,
+        "buyRateVariance": -6,
+        "revenueQualityRPM": 2.36,
+        "onTimeDelivery": 84.5,
+        "exceptionRate": 4.5,
+        "firstTimeRight": 88,
+        "dwellTime": 3
+      },
+      "East": {
+        "grossMargin": 12.4,
+        "netMargin": 10.1,
+        "accessorialRecovery": 79.2,
+        "buyRateVariance": -6.7,
+        "revenueQualityRPM": 2.16,
+        "onTimeDelivery": 81.6,
+        "exceptionRate": 4.2,
+        "firstTimeRight": 86.8,
+        "dwellTime": 2.5
+      }
+    }
   },
   {
     "month": "2026-03",
@@ -321,18 +1231,88 @@
     "onTimeDelivery": 97.2,
     "exceptionRate": 1.5,
     "firstTimeRight": 94.8,
-    "dwellTime": 1.2
+    "dwellTime": 1.2,
+    "regions": {
+      "West": {
+        "grossMargin": 19.1,
+        "netMargin": 13.7,
+        "accessorialRecovery": 93.6,
+        "buyRateVariance": 4.4,
+        "revenueQualityRPM": 2.83,
+        "onTimeDelivery": 97.1,
+        "exceptionRate": 1.4,
+        "firstTimeRight": 95.3,
+        "dwellTime": 0.8
+      },
+      "Central": {
+        "grossMargin": 18.3,
+        "netMargin": 13.9,
+        "accessorialRecovery": 90.8,
+        "buyRateVariance": 3.1,
+        "revenueQualityRPM": 2.77,
+        "onTimeDelivery": 96,
+        "exceptionRate": 1.3,
+        "firstTimeRight": 93.5,
+        "dwellTime": 1.4
+      },
+      "East": {
+        "grossMargin": 15.9,
+        "netMargin": 13,
+        "accessorialRecovery": 89.5,
+        "buyRateVariance": 2.8,
+        "revenueQualityRPM": 2.64,
+        "onTimeDelivery": 95.3,
+        "exceptionRate": 1.5,
+        "firstTimeRight": 93.4,
+        "dwellTime": 1.2
+      }
+    }
   },
   {
     "month": "2026-04",
     "grossMargin": 16.1,
     "netMargin": 12.7,
-    "accessorialRecovery": 87.0,
+    "accessorialRecovery": 87,
     "buyRateVariance": 0.9,
-    "revenueQualityRPM": 2.60,
+    "revenueQualityRPM": 2.6,
     "onTimeDelivery": 95.9,
     "exceptionRate": 2.4,
     "firstTimeRight": 91.6,
-    "dwellTime": 1.7
+    "dwellTime": 1.7,
+    "regions": {
+      "West": {
+        "grossMargin": 17.7,
+        "netMargin": 13.2,
+        "accessorialRecovery": 89,
+        "buyRateVariance": 1.2,
+        "revenueQualityRPM": 2.74,
+        "onTimeDelivery": 96.7,
+        "exceptionRate": 1.7,
+        "firstTimeRight": 92.2,
+        "dwellTime": 1.7
+      },
+      "Central": {
+        "grossMargin": 15.6,
+        "netMargin": 11.9,
+        "accessorialRecovery": 88.1,
+        "buyRateVariance": 1.1,
+        "revenueQualityRPM": 2.6,
+        "onTimeDelivery": 95.7,
+        "exceptionRate": 2.1,
+        "firstTimeRight": 91.7,
+        "dwellTime": 1.5
+      },
+      "East": {
+        "grossMargin": 15.7,
+        "netMargin": 11.9,
+        "accessorialRecovery": 84.3,
+        "buyRateVariance": -1,
+        "revenueQualityRPM": 2.45,
+        "onTimeDelivery": 94.9,
+        "exceptionRate": 2.3,
+        "firstTimeRight": 91,
+        "dwellTime": 1.6
+      }
+    }
   }
 ]
