@@ -204,9 +204,9 @@ const insights = computed(() => {
             md="4"
             lg
           >
-            <v-card variant="outlined" class="pa-4" rounded="lg">
+            <v-card variant="outlined" class="pa-4 text-center" rounded="lg">
               <div class="text-caption text-grey-darken-1 text-uppercase font-weight-medium">{{ card.title }}</div>
-              <div class="d-flex align-center mt-1">
+              <div class="d-flex align-center justify-center mt-1">
                 <span class="text-h5 font-weight-bold">{{ card.value }}</span>
                 <v-icon
                   v-if="card.delta"
@@ -230,9 +230,9 @@ const insights = computed(() => {
             sm="6"
             md="3"
           >
-            <v-card variant="outlined" class="pa-4" rounded="lg">
+            <v-card variant="outlined" class="pa-4 text-center" rounded="lg">
               <div class="text-caption text-grey-darken-1 text-uppercase font-weight-medium">{{ card.title }}</div>
-              <div class="d-flex align-center mt-1">
+              <div class="d-flex align-center justify-center mt-1">
                 <span class="text-h5 font-weight-bold">{{ card.value }}</span>
                 <v-icon
                   v-if="card.delta"
