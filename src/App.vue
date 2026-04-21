@@ -19,47 +19,74 @@ interface MonthData {
 
 const data = metricsData as MonthData[]
 
-// Month picker
+// Month picker — year-level + individual months
+const years = [...new Set(data.map(d => d.month.split('-')[0]))]
+
 const monthOptions = computed(() => {
-  const opts = [{ title: 'All Months', value: 'all' }]
-  data.forEach(d => {
-    const [y, m] = d.month.split('-')
-    const label = new Date(+y, +m - 1).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })
-    opts.push({ title: label, value: d.month })
+  const opts: { title: string; value: string }[] = []
+  years.forEach(year => {
+    opts.push({ title: `${year}: All Months`, value: `year-${year}` })
+    data
+      .filter(d => d.month.startsWith(year))
+      .forEach(d => {
+        const [y, m] = d.month.split('-')
+        const label = new Date(+y, +m - 1).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })
+        opts.push({ title: '  ' + label, value: d.month })
+      })
   })
   return opts
 })
 
-const selectedMonth = ref('all')
+const selectedMonth = ref('year-2026')
+
+const isYearSelection = computed(() => selectedMonth.value.startsWith('year-'))
+const selectedYear = computed(() => isYearSelection.value ? selectedMonth.value.replace('year-', '') : null)
 
 // Filtered data for charts
 const filteredData = computed(() => {
-  if (selectedMonth.value === 'all') return data
-  return data.filter(d => d.month === selectedMonth.value)
+  if (isYearSelection.value) {
+    return data.filter(d => d.month.startsWith(selectedYear.value!))
+  }
+  // Individual month: show 6 months preceding + current month
+  const idx = data.findIndex(d => d.month === selectedMonth.value)
+  const start = Math.max(0, idx - 6)
+  return data.slice(start, idx + 1)
 })
 
-// Current month data (for cards)
+// Helper to average a subset of data
+function avg(subset: MonthData[]): MonthData {
+  const len = subset.length
+  return {
+    month: '',
+    grossMargin: +(subset.reduce((s, d) => s + d.grossMargin, 0) / len).toFixed(1),
+    netMargin: +(subset.reduce((s, d) => s + d.netMargin, 0) / len).toFixed(1),
+    accessorialRecovery: +(subset.reduce((s, d) => s + d.accessorialRecovery, 0) / len).toFixed(1),
+    buyRateVariance: +(subset.reduce((s, d) => s + d.buyRateVariance, 0) / len).toFixed(1),
+    revenueQualityRPM: +(subset.reduce((s, d) => s + d.revenueQualityRPM, 0) / len).toFixed(2),
+    onTimeDelivery: +(subset.reduce((s, d) => s + d.onTimeDelivery, 0) / len).toFixed(1),
+    exceptionRate: +(subset.reduce((s, d) => s + d.exceptionRate, 0) / len).toFixed(1),
+    firstTimeRight: +(subset.reduce((s, d) => s + d.firstTimeRight, 0) / len).toFixed(1),
+    dwellTime: +(subset.reduce((s, d) => s + d.dwellTime, 0) / len).toFixed(1),
+  }
+}
+
+// Current data (for cards)
 const currentData = computed(() => {
-  if (selectedMonth.value === 'all') {
-    const len = data.length
-    return {
-      grossMargin: +(data.reduce((s, d) => s + d.grossMargin, 0) / len).toFixed(1),
-      netMargin: +(data.reduce((s, d) => s + d.netMargin, 0) / len).toFixed(1),
-      accessorialRecovery: +(data.reduce((s, d) => s + d.accessorialRecovery, 0) / len).toFixed(1),
-      buyRateVariance: +(data.reduce((s, d) => s + d.buyRateVariance, 0) / len).toFixed(1),
-      revenueQualityRPM: +(data.reduce((s, d) => s + d.revenueQualityRPM, 0) / len).toFixed(2),
-      onTimeDelivery: +(data.reduce((s, d) => s + d.onTimeDelivery, 0) / len).toFixed(1),
-      exceptionRate: +(data.reduce((s, d) => s + d.exceptionRate, 0) / len).toFixed(1),
-      firstTimeRight: +(data.reduce((s, d) => s + d.firstTimeRight, 0) / len).toFixed(1),
-      dwellTime: +(data.reduce((s, d) => s + d.dwellTime, 0) / len).toFixed(1),
-    }
+  if (isYearSelection.value) {
+    const yearData = data.filter(d => d.month.startsWith(selectedYear.value!))
+    return avg(yearData)
   }
   return data.find(d => d.month === selectedMonth.value)!
 })
 
-// Previous month data (for delta arrows)
-const previousData = computed(() => {
-  if (selectedMonth.value === 'all') return null
+// Previous data (for delta arrows)
+const previousData = computed((): MonthData | null => {
+  if (isYearSelection.value) {
+    // Compare to previous year
+    const prevYear = String(+selectedYear.value! - 1)
+    const prevYearData = data.filter(d => d.month.startsWith(prevYear))
+    return prevYearData.length ? avg(prevYearData) : null
+  }
   const idx = data.findIndex(d => d.month === selectedMonth.value)
   return idx > 0 ? data[idx - 1] : null
 })
@@ -224,13 +251,13 @@ const insights = computed(() => {
           <v-col cols="12" md="6">
             <v-card variant="outlined" class="pa-4" rounded="lg">
               <div class="text-subtitle-1 font-weight-bold text-grey-darken-2 mb-3">Gross Margin Over Time</div>
-              <GrossMarginChart :data="filteredData" />
+              <GrossMarginChart :data="filteredData" :highlighted-month="selectedMonth" />
             </v-card>
           </v-col>
           <v-col cols="12" md="6">
             <v-card variant="outlined" class="pa-4" rounded="lg">
               <div class="text-subtitle-1 font-weight-bold text-grey-darken-2 mb-3">On-Time Delivery & Dwell Time</div>
-              <ServiceChart :data="filteredData" />
+              <ServiceChart :data="filteredData" :highlighted-month="selectedMonth" />
             </v-card>
           </v-col>
         </v-row>

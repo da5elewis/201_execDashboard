@@ -21,28 +21,39 @@ interface MonthData {
 
 const props = defineProps<{
   data: MonthData[]
+  highlightedMonth?: string
 }>()
 
-const chartData = computed(() => ({
-  labels: props.data.map(d => {
-    const [y, m] = d.month.split('-')
-    return new Date(+y, +m - 1).toLocaleDateString('en-US', { month: 'short', year: '2-digit' })
-  }),
-  datasets: [
-    {
-      label: 'On-Time Delivery %',
-      data: props.data.map(d => d.onTimeDelivery),
-      backgroundColor: '#1565C0',
-      yAxisID: 'y',
-    },
-    {
-      label: 'Dwell Time (hrs)',
-      data: props.data.map(d => d.dwellTime),
-      backgroundColor: '#FF8F00',
-      yAxisID: 'y1',
-    },
-  ],
-}))
+const chartData = computed(() => {
+  const highlightIdx = props.highlightedMonth && props.highlightedMonth !== 'all'
+    ? props.data.findIndex(d => d.month === props.highlightedMonth)
+    : -1
+
+  return {
+    labels: props.data.map(d => {
+      const [y, m] = d.month.split('-')
+      return new Date(+y, +m - 1).toLocaleDateString('en-US', { month: 'short', year: '2-digit' })
+    }),
+    datasets: [
+      {
+        label: 'On-Time Delivery %',
+        data: props.data.map(d => d.onTimeDelivery),
+        backgroundColor: props.data.map((_, i) => i === highlightIdx ? '#0D47A1' : '#1565C0'),
+        borderColor: props.data.map((_, i) => i === highlightIdx ? '#FDD835' : 'transparent'),
+        borderWidth: props.data.map((_, i) => i === highlightIdx ? 3 : 0),
+        yAxisID: 'y',
+      },
+      {
+        label: 'Dwell Time (hrs)',
+        data: props.data.map(d => d.dwellTime),
+        backgroundColor: props.data.map((_, i) => i === highlightIdx ? '#E65100' : '#FF8F00'),
+        borderColor: props.data.map((_, i) => i === highlightIdx ? '#FDD835' : 'transparent'),
+        borderWidth: props.data.map((_, i) => i === highlightIdx ? 3 : 0),
+        yAxisID: 'y1',
+      },
+    ],
+  }
+})
 
 const chartOptions = {
   responsive: true,

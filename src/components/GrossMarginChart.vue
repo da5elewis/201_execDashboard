@@ -22,42 +22,51 @@ interface MonthData {
 
 const props = defineProps<{
   data: MonthData[]
+  highlightedMonth?: string
 }>()
 
-const chartData = computed(() => ({
-  labels: props.data.map(d => {
-    const [y, m] = d.month.split('-')
-    return new Date(+y, +m - 1).toLocaleDateString('en-US', { month: 'short', year: '2-digit' })
-  }),
-  datasets: [
-    {
-      label: 'Gross Margin %',
-      data: props.data.map(d => d.grossMargin),
-      borderColor: '#2E7D32',
-      backgroundColor: 'rgba(46,125,50,0.08)',
-      fill: true,
-      tension: 0.3,
-      pointRadius: 3,
-      pointBackgroundColor: '#2E7D32',
-    },
-    {
-      label: 'Target Min (15%)',
-      data: props.data.map(() => 15),
-      borderColor: '#BDBDBD',
-      borderDash: [6, 4],
-      pointRadius: 0,
-      fill: false,
-    },
-    {
-      label: 'Target Max (18%)',
-      data: props.data.map(() => 18),
-      borderColor: '#BDBDBD',
-      borderDash: [6, 4],
-      pointRadius: 0,
-      fill: false,
-    },
-  ],
-}))
+const chartData = computed(() => {
+  const highlightIdx = props.highlightedMonth && props.highlightedMonth !== 'all'
+    ? props.data.findIndex(d => d.month === props.highlightedMonth)
+    : -1
+
+  return {
+    labels: props.data.map(d => {
+      const [y, m] = d.month.split('-')
+      return new Date(+y, +m - 1).toLocaleDateString('en-US', { month: 'short', year: '2-digit' })
+    }),
+    datasets: [
+      {
+        label: 'Gross Margin %',
+        data: props.data.map(d => d.grossMargin),
+        borderColor: '#2E7D32',
+        backgroundColor: 'rgba(46,125,50,0.08)',
+        fill: true,
+        tension: 0.3,
+        pointRadius: props.data.map((_, i) => i === highlightIdx ? 8 : 3),
+        pointBackgroundColor: props.data.map((_, i) => i === highlightIdx ? '#1B5E20' : '#2E7D32'),
+        pointBorderColor: props.data.map((_, i) => i === highlightIdx ? '#FDD835' : '#2E7D32'),
+        pointBorderWidth: props.data.map((_, i) => i === highlightIdx ? 3 : 0),
+      },
+      {
+        label: 'Target Min (15%)',
+        data: props.data.map(() => 15),
+        borderColor: '#BDBDBD',
+        borderDash: [6, 4],
+        pointRadius: 0,
+        fill: false,
+      },
+      {
+        label: 'Target Max (18%)',
+        data: props.data.map(() => 18),
+        borderColor: '#BDBDBD',
+        borderDash: [6, 4],
+        pointRadius: 0,
+        fill: false,
+      },
+    ],
+  }
+})
 
 const chartOptions = {
   responsive: true,
