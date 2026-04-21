@@ -127,6 +127,19 @@ function avg(subset: MonthData[]): MonthData {
   }
 }
 
+// National data (always from top-level values)
+const nationalData = computed<MonthData[]>(() => {
+  return rawData.map(({ regions, ...rest }) => rest)
+})
+
+const nationalChartData = computed(() => {
+  const start = Math.max(0, Math.min(chartOffset.value, nationalData.value.length - CHART_WINDOW))
+  const end = Math.min(nationalData.value.length, start + CHART_WINDOW)
+  return nationalData.value.slice(start, end)
+})
+
+const isRegionSelected = computed(() => selectedRegion.value !== 'National')
+
 // Current data (for cards)
 const currentData = computed(() => {
   if (isYearSelection.value) {
@@ -134,6 +147,16 @@ const currentData = computed(() => {
     return avg(yearData)
   }
   return data.value.find(d => d.month === selectedMonth.value)!
+})
+
+// National current data (for card comparison)
+const nationalCurrentData = computed(() => {
+  if (!isRegionSelected.value) return null
+  if (isYearSelection.value) {
+    const yearData = nationalData.value.filter(d => d.month.startsWith(selectedYear.value!))
+    return avg(yearData)
+  }
+  return nationalData.value.find(d => d.month === selectedMonth.value)!
 })
 
 // Previous data (for delta arrows)
@@ -171,23 +194,25 @@ function deltaReverse(current: number, previous: number | undefined): { icon: st
 const financialCards = computed(() => {
   const c = currentData.value
   const p = previousData.value
+  const n = nationalCurrentData.value
   return [
-    { title: 'Gross Margin', value: c.grossMargin + '%', target: '15–18%', delta: delta(c.grossMargin, p?.grossMargin) },
-    { title: 'Net Margin', value: c.netMargin + '%', target: '>12%', delta: delta(c.netMargin, p?.netMargin) },
-    { title: 'Accessorial Recovery', value: c.accessorialRecovery + '%', target: '>85%', delta: delta(c.accessorialRecovery, p?.accessorialRecovery) },
-    { title: 'Buy-Rate Variance', value: (c.buyRateVariance > 0 ? '+' : '') + c.buyRateVariance + '%', target: '±5%', delta: delta(c.buyRateVariance, p?.buyRateVariance) },
-    { title: 'Revenue Quality (RPM)', value: '$' + c.revenueQualityRPM.toFixed(2), target: '>$2.50', delta: delta(c.revenueQualityRPM, p?.revenueQualityRPM) },
+    { title: 'Gross Margin', value: c.grossMargin + '%', target: '15–18%', delta: delta(c.grossMargin, p?.grossMargin), nationalValue: n ? n.grossMargin + '%' : null },
+    { title: 'Net Margin', value: c.netMargin + '%', target: '>12%', delta: delta(c.netMargin, p?.netMargin), nationalValue: n ? n.netMargin + '%' : null },
+    { title: 'Accessorial Recovery', value: c.accessorialRecovery + '%', target: '>85%', delta: delta(c.accessorialRecovery, p?.accessorialRecovery), nationalValue: n ? n.accessorialRecovery + '%' : null },
+    { title: 'Buy-Rate Variance', value: (c.buyRateVariance > 0 ? '+' : '') + c.buyRateVariance + '%', target: '±5%', delta: delta(c.buyRateVariance, p?.buyRateVariance), nationalValue: n ? (n.buyRateVariance > 0 ? '+' : '') + n.buyRateVariance + '%' : null },
+    { title: 'Revenue Quality (RPM)', value: '$' + c.revenueQualityRPM.toFixed(2), target: '>$2.50', delta: delta(c.revenueQualityRPM, p?.revenueQualityRPM), nationalValue: n ? '$' + n.revenueQualityRPM.toFixed(2) : null },
   ]
 })
 
 const serviceCards = computed(() => {
   const c = currentData.value
   const p = previousData.value
+  const n = nationalCurrentData.value
   return [
-    { title: 'On-Time Delivery (OTD)', value: c.onTimeDelivery + '%', target: '>95%', delta: delta(c.onTimeDelivery, p?.onTimeDelivery) },
-    { title: 'Exception Rate', value: c.exceptionRate + '%', target: '<3%', delta: deltaReverse(c.exceptionRate, p?.exceptionRate) },
-    { title: 'First-Time-Right', value: c.firstTimeRight + '%', target: '>90%', delta: delta(c.firstTimeRight, p?.firstTimeRight) },
-    { title: 'Dwell Time (Origin/Dest)', value: c.dwellTime + ' hrs', target: '<2 hrs', delta: deltaReverse(c.dwellTime, p?.dwellTime) },
+    { title: 'On-Time Delivery (OTD)', value: c.onTimeDelivery + '%', target: '>95%', delta: delta(c.onTimeDelivery, p?.onTimeDelivery), nationalValue: n ? n.onTimeDelivery + '%' : null },
+    { title: 'Exception Rate', value: c.exceptionRate + '%', target: '<3%', delta: deltaReverse(c.exceptionRate, p?.exceptionRate), nationalValue: n ? n.exceptionRate + '%' : null },
+    { title: 'First-Time-Right', value: c.firstTimeRight + '%', target: '>90%', delta: delta(c.firstTimeRight, p?.firstTimeRight), nationalValue: n ? n.firstTimeRight + '%' : null },
+    { title: 'Dwell Time (Origin/Dest)', value: c.dwellTime + ' hrs', target: '<2 hrs', delta: deltaReverse(c.dwellTime, p?.dwellTime), nationalValue: n ? n.dwellTime + ' hrs' : null },
   ]
 })
 
@@ -268,8 +293,38 @@ const insights = computed(() => {
 
     <v-main>
       <v-container fluid class="pa-6">
+        <!-- Performance Snapshot -->
+        <v-label class="text-h6 font-weight-bold text-grey-darken-2 mb-3">Performance Snapshot</v-label>
+        <v-row>
+          <v-col cols="12" md="8">
+            <v-card variant="flat" rounded="lg">
+              <v-list lines="three">
+                <v-list-item
+                  v-for="insight in insights"
+                  :key="insight.label"
+                >
+                  <template #prepend>
+                    <v-icon :color="insight.color" class="mr-3">{{ insight.icon }}</v-icon>
+                  </template>
+                  <v-list-item-title class="font-weight-bold">{{ insight.label }}</v-list-item-title>
+                  <v-list-item-subtitle class="text-wrap">{{ insight.text }}</v-list-item-subtitle>
+                </v-list-item>
+              </v-list>
+            </v-card>
+          </v-col>
+          <v-col cols="12" md="4" class="d-flex align-center">
+            <v-img
+              src="/truck.png"
+              alt="Fast Forward Logistics truck being unloaded"
+              rounded="lg"
+              cover
+              max-height="260"
+            />
+          </v-col>
+        </v-row>
+
         <!-- Financial Performance -->
-        <v-label class="text-h6 font-weight-bold text-grey-darken-2 mb-3">Financial Performance</v-label>
+        <v-label class="text-h6 font-weight-bold text-grey-darken-2 mt-8 mb-3">Financial Performance</v-label>
         <v-row>
           <v-col
             v-for="card in financialCards"
@@ -290,6 +345,7 @@ const insights = computed(() => {
                     size="20"
                     class="ml-2"
                   >{{ card.delta.icon }}</v-icon>
+                  <span v-if="card.nationalValue" class="text-body-2 ml-3" style="color: #9E9E9E">{{ card.nationalValue }}</span>
                 </v-card-title>
               </v-card-item>
               <v-card-text class="text-caption text-grey pt-0">Target: {{ card.target }}</v-card-text>
@@ -318,6 +374,7 @@ const insights = computed(() => {
                     size="20"
                     class="ml-2"
                   >{{ card.delta.icon }}</v-icon>
+                  <span v-if="card.nationalValue" class="text-body-2 ml-3" style="color: #9E9E9E">{{ card.nationalValue }}</span>
                 </v-card-title>
               </v-card-item>
               <v-card-text class="text-caption text-grey pt-0">Target: {{ card.target }}</v-card-text>
@@ -343,7 +400,7 @@ const insights = computed(() => {
                 </template>
               </v-card-item>
               <v-card-text>
-                <GrossMarginChart :data="chartData" :highlighted-month="selectedMonth" @select-month="onChartSelectMonth" />
+                <GrossMarginChart :data="chartData" :national-data="isRegionSelected ? nationalChartData : undefined" :highlighted-month="selectedMonth" @select-month="onChartSelectMonth" />
               </v-card-text>
             </v-card>
           </v-col>
@@ -363,39 +420,9 @@ const insights = computed(() => {
                 </template>
               </v-card-item>
               <v-card-text>
-                <ServiceChart :data="chartData" :highlighted-month="selectedMonth" @select-month="onChartSelectMonth" />
+                <ServiceChart :data="chartData" :national-data="isRegionSelected ? nationalChartData : undefined" :highlighted-month="selectedMonth" @select-month="onChartSelectMonth" />
               </v-card-text>
             </v-card>
-          </v-col>
-        </v-row>
-
-        <!-- Performance Snapshot -->
-        <v-label class="text-h6 font-weight-bold text-grey-darken-2 mt-8 mb-3">Performance Snapshot</v-label>
-        <v-row>
-          <v-col cols="12" md="8">
-            <v-card variant="flat" rounded="lg">
-              <v-list lines="three">
-                <v-list-item
-                  v-for="insight in insights"
-                  :key="insight.label"
-                >
-                  <template #prepend>
-                    <v-icon :color="insight.color" class="mr-3">{{ insight.icon }}</v-icon>
-                  </template>
-                  <v-list-item-title class="font-weight-bold">{{ insight.label }}</v-list-item-title>
-                  <v-list-item-subtitle class="text-wrap">{{ insight.text }}</v-list-item-subtitle>
-                </v-list-item>
-              </v-list>
-            </v-card>
-          </v-col>
-          <v-col cols="12" md="4" class="d-flex align-center">
-            <v-img
-              src="/truck.png"
-              alt="Fast Forward Logistics truck being unloaded"
-              rounded="lg"
-              cover
-              max-height="260"
-            />
           </v-col>
         </v-row>
       </v-container>

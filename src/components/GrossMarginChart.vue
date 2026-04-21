@@ -22,6 +22,7 @@ interface MonthData {
 
 const props = defineProps<{
   data: MonthData[]
+  nationalData?: MonthData[]
   highlightedMonth?: string
 }>()
 
@@ -61,6 +62,15 @@ const chartData = computed(() => {
         pointBorderColor: props.data.map((_, i) => i === highlightIdx ? '#FDD835' : '#2E7D32'),
         pointBorderWidth: props.data.map((_, i) => i === highlightIdx ? 3 : 0),
       },
+      ...(props.nationalData ? [{
+        label: 'National Gross Margin %',
+        data: props.nationalData.map(d => d.grossMargin),
+        borderColor: 'rgba(46,125,50,0.3)',
+        backgroundColor: 'transparent',
+        fill: false,
+        tension: 0.3,
+        pointRadius: 0,
+      }] : []),
       {
         label: 'Target Min (15%)',
         data: props.data.map(() => 15),
@@ -81,12 +91,14 @@ const chartData = computed(() => {
   }
 })
 
+const hasNational = computed(() => !!props.nationalData)
+
 const chartOptions = {
   responsive: true,
   maintainAspectRatio: false,
   onClick: onChartClick,
   plugins: {
-    legend: { display: true, position: 'bottom' as const },
+    legend: { display: false },
     title: { display: false },
   },
   scales: {
@@ -104,7 +116,50 @@ const chartOptions = {
 </script>
 
 <template>
-  <div style="height: 300px">
-    <Line :data="chartData" :options="chartOptions" />
+  <div>
+    <div style="height: 300px">
+      <Line :data="chartData" :options="chartOptions" />
+    </div>
+    <div class="chart-legend">
+      <div class="legend-col">
+        <div class="legend-item"><span class="legend-swatch" style="background: #2E7D32"></span> Gross Margin %</div>
+        <div v-if="hasNational" class="legend-item"><span class="legend-swatch" style="background: rgba(46,125,50,0.3)"></span> National Gross Margin %</div>
+      </div>
+      <div class="legend-col">
+        <div class="legend-item"><span class="legend-swatch legend-dashed" style="border-color: #BDBDBD"></span> Target Max (18%)</div>
+        <div class="legend-item"><span class="legend-swatch legend-dashed" style="border-color: #BDBDBD"></span> Target Min (15%)</div>
+      </div>
+    </div>
   </div>
 </template>
+
+<style scoped>
+.chart-legend {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 12px 0;
+  font-size: 12px;
+  color: #616161;
+}
+.legend-col {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.legend-swatch {
+  display: inline-block;
+  width: 24px;
+  height: 3px;
+  border-radius: 2px;
+}
+.legend-dashed {
+  background: transparent;
+  border-top: 2px dashed;
+  height: 0;
+}
+</style>
