@@ -51,17 +51,6 @@ const selectedMonth = ref('year-2026')
 const isYearSelection = computed(() => selectedMonth.value.startsWith('year-'))
 const selectedYear = computed(() => isYearSelection.value ? selectedMonth.value.replace('year-', '') : null)
 
-// Filtered data for charts
-const filteredData = computed(() => {
-  if (isYearSelection.value) {
-    return data.filter(d => d.month.startsWith(selectedYear.value!))
-  }
-  // Individual month: show 6 months preceding + current month
-  const idx = data.findIndex(d => d.month === selectedMonth.value)
-  const start = Math.max(0, idx - 6)
-  return data.slice(start, idx + 1)
-})
-
 // Chart time navigation — operates on full dataset
 const chartOffset = ref(0)
 const CHART_WINDOW = 7
