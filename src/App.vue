@@ -338,14 +338,21 @@ const insights = computed(() => {
               <v-card-item>
                 <v-card-subtitle class="font-weight-medium">{{ card.title }}</v-card-subtitle>
                 <v-card-title class="d-flex align-center justify-center">
-                  <span class="text-h5 font-weight-bold">{{ card.value }}</span>
+                  <div v-if="card.nationalValue" class="d-flex flex-column align-center">
+                    <span class="text-h5 font-weight-bold">{{ card.value }}</span>
+                    <span class="text-caption" style="color: #9E9E9E; line-height: 1; font-size: 0.5em">{{ selectedRegion }}</span>
+                  </div>
+                  <span v-else class="text-h5 font-weight-bold">{{ card.value }}</span>
                   <v-icon
                     v-if="card.delta"
                     :color="card.delta.color"
                     size="20"
                     class="ml-2"
                   >{{ card.delta.icon }}</v-icon>
-                  <span v-if="card.nationalValue" class="text-body-2 ml-3" style="color: #9E9E9E">{{ card.nationalValue }}</span>
+                  <div v-if="card.nationalValue" class="d-flex flex-column align-center ml-3">
+                    <span class="text-body-2" style="color: #9E9E9E">{{ card.nationalValue }}</span>
+                    <span class="text-caption" style="color: #BDBDBD; line-height: 1; font-size: 0.5em">National</span>
+                  </div>
                 </v-card-title>
               </v-card-item>
               <v-card-text class="text-caption text-grey pt-0">Target: {{ card.target }}</v-card-text>
@@ -367,14 +374,21 @@ const insights = computed(() => {
               <v-card-item>
                 <v-card-subtitle class="font-weight-medium">{{ card.title }}</v-card-subtitle>
                 <v-card-title class="d-flex align-center justify-center">
-                  <span class="text-h5 font-weight-bold">{{ card.value }}</span>
+                  <div v-if="card.nationalValue" class="d-flex flex-column align-center">
+                    <span class="text-h5 font-weight-bold">{{ card.value }}</span>
+                    <span class="text-caption" style="color: #9E9E9E; line-height: 1; font-size: 0.5em">{{ selectedRegion }}</span>
+                  </div>
+                  <span v-else class="text-h5 font-weight-bold">{{ card.value }}</span>
                   <v-icon
                     v-if="card.delta"
                     :color="card.delta.color"
                     size="20"
                     class="ml-2"
                   >{{ card.delta.icon }}</v-icon>
-                  <span v-if="card.nationalValue" class="text-body-2 ml-3" style="color: #9E9E9E">{{ card.nationalValue }}</span>
+                  <div v-if="card.nationalValue" class="d-flex flex-column align-center ml-3">
+                    <span class="text-body-2" style="color: #9E9E9E">{{ card.nationalValue }}</span>
+                    <span class="text-caption" style="color: #BDBDBD; line-height: 1; font-size: 0.5em">National</span>
+                  </div>
                 </v-card-title>
               </v-card-item>
               <v-card-text class="text-caption text-grey pt-0">Target: {{ card.target }}</v-card-text>
