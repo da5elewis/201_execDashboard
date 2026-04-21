@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { useTheme } from 'vuetify'
 import metricsData from './data/metrics.json'
 import GrossMarginChart from './components/GrossMarginChart.vue'
@@ -61,6 +61,41 @@ const filteredData = computed(() => {
   const start = Math.max(0, idx - 6)
   return data.slice(start, idx + 1)
 })
+
+// Chart time navigation — operates on full dataset
+const chartOffset = ref(0)
+const CHART_WINDOW = 7
+
+// Initialize chart window based on current selection
+function initChartOffset() {
+  if (isYearSelection.value) {
+    const yearStart = data.findIndex(d => d.month.startsWith(selectedYear.value!))
+    chartOffset.value = yearStart >= 0 ? yearStart : 0
+  } else {
+    const idx = data.findIndex(d => d.month === selectedMonth.value)
+    chartOffset.value = Math.max(0, idx - 6)
+  }
+}
+initChartOffset()
+
+const chartData = computed(() => {
+  const start = Math.max(0, Math.min(chartOffset.value, data.length - CHART_WINDOW))
+  const end = Math.min(data.length, start + CHART_WINDOW)
+  return data.slice(start, end)
+})
+
+const canChartBack = computed(() => chartOffset.value > 0)
+const canChartForward = computed(() => chartOffset.value + CHART_WINDOW < data.length)
+
+function chartBack() {
+  chartOffset.value = Math.max(0, chartOffset.value - 5)
+}
+function chartForward() {
+  chartOffset.value = Math.min(data.length - CHART_WINDOW, chartOffset.value + 5)
+}
+
+// Reset offset when filter changes
+watch(selectedMonth, () => { initChartOffset() })
 
 // Helper to average a subset of data
 function avg(subset: MonthData[]): MonthData {
@@ -272,20 +307,40 @@ const insights = computed(() => {
           <v-col cols="12" md="6">
             <v-card variant="outlined" rounded="lg">
               <v-card-item>
-                <v-card-title class="text-subtitle-2 font-weight-bold text-grey-darken-2">Gross Margin Over Time</v-card-title>
+                <template #default>
+                  <v-card-title class="text-subtitle-2 font-weight-bold text-grey-darken-2">Gross Margin Over Time</v-card-title>
+                </template>
+                <template #append>
+                  <v-btn icon variant="text" size="small" :disabled="!canChartBack" @click="chartBack">
+                    <v-icon>mdi-chevron-left</v-icon>
+                  </v-btn>
+                  <v-btn icon variant="text" size="small" :disabled="!canChartForward" @click="chartForward">
+                    <v-icon>mdi-chevron-right</v-icon>
+                  </v-btn>
+                </template>
               </v-card-item>
               <v-card-text>
-                <GrossMarginChart :data="filteredData" :highlighted-month="selectedMonth" />
+                <GrossMarginChart :data="chartData" :highlighted-month="selectedMonth" />
               </v-card-text>
             </v-card>
           </v-col>
           <v-col cols="12" md="6">
             <v-card variant="outlined" rounded="lg">
               <v-card-item>
-                <v-card-title class="text-subtitle-2 font-weight-bold text-grey-darken-2">On-Time Delivery & Dwell Time</v-card-title>
+                <template #default>
+                  <v-card-title class="text-subtitle-2 font-weight-bold text-grey-darken-2">On-Time Delivery & Dwell Time</v-card-title>
+                </template>
+                <template #append>
+                  <v-btn icon variant="text" size="small" :disabled="!canChartBack" @click="chartBack">
+                    <v-icon>mdi-chevron-left</v-icon>
+                  </v-btn>
+                  <v-btn icon variant="text" size="small" :disabled="!canChartForward" @click="chartForward">
+                    <v-icon>mdi-chevron-right</v-icon>
+                  </v-btn>
+                </template>
               </v-card-item>
               <v-card-text>
-                <ServiceChart :data="filteredData" :highlighted-month="selectedMonth" />
+                <ServiceChart :data="chartData" :highlighted-month="selectedMonth" />
               </v-card-text>
             </v-card>
           </v-col>
