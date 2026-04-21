@@ -145,6 +145,7 @@ const nationalChartData = computed(() => {
 })
 
 const isRegionSelected = computed(() => selectedRegion.value !== 'National')
+const showHeatmap = ref(false)
 
 // Current data (for cards)
 const currentData = computed(() => {
@@ -476,8 +477,8 @@ const heatmapRows = computed(() => {
           </v-col>
         </v-row>
 
-        <!-- Performance Heatmap (National view only) -->
-        <template v-if="!isRegionSelected">
+        <!-- Performance Heatmap -->
+        <template v-if="!isRegionSelected || showHeatmap">
           <v-label class="text-h6 font-weight-bold text-grey-darken-2 mt-8 mb-3">Regional Performance Heatmap</v-label>
           <v-card variant="outlined" rounded="lg">
             <v-card-text>
@@ -485,6 +486,19 @@ const heatmapRows = computed(() => {
             </v-card-text>
           </v-card>
         </template>
+
+        <!-- Heatmap toggle (regional view only) -->
+        <div v-if="isRegionSelected" class="d-flex justify-center mt-4">
+          <v-btn
+            variant="text"
+            size="small"
+            color="grey"
+            @click="showHeatmap = !showHeatmap"
+          >
+            <v-icon class="mr-1" size="16">{{ showHeatmap ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
+            {{ showHeatmap ? 'Hide' : 'Show' }} Regional Heatmap
+          </v-btn>
+        </div>
       </v-container>
     </v-main>
   </v-app>
