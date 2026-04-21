@@ -18,7 +18,26 @@ interface MonthData {
   dwellTime: number
 }
 
-const data = metricsData as MonthData[]
+interface RawMonthData extends MonthData {
+  regions: Record<string, Omit<MonthData, 'month'>>
+}
+
+const rawData = metricsData as RawMonthData[]
+
+// Region picker
+const selectedRegion = ref('National')
+const regionOptions = ['National', 'East', 'Central', 'West']
+
+// Project data based on selected region
+const data = computed<MonthData[]>(() => {
+  if (selectedRegion.value === 'National') {
+    return rawData.map(({ regions, ...rest }) => rest)
+  }
+  return rawData.map(d => ({
+    month: d.month,
+    ...d.regions[selectedRegion.value]
+  } as MonthData))
+})
 
 // Theme toggle
 const theme = useTheme()
@@ -29,13 +48,13 @@ function toggleTheme() {
 }
 
 // Month picker — year-level + individual months
-const years = [...new Set(data.map(d => d.month.split('-')[0]))]
+const years = [...new Set(rawData.map(d => d.month.split('-')[0]))]
 
 const monthOptions = computed(() => {
   const opts: { title: string; value: string }[] = []
   years.forEach(year => {
     opts.push({ title: `${year}: All Months`, value: `year-${year}` })
-    data
+    rawData
       .filter(d => d.month.startsWith(year))
       .forEach(d => {
         const [y, m] = d.month.split('-')
@@ -58,29 +77,29 @@ const CHART_WINDOW = 7
 // Initialize chart window based on current selection
 function initChartOffset() {
   if (isYearSelection.value) {
-    const yearStart = data.findIndex(d => d.month.startsWith(selectedYear.value!))
+    const yearStart = data.value.findIndex(d => d.month.startsWith(selectedYear.value!))
     chartOffset.value = yearStart >= 0 ? yearStart : 0
   } else {
-    const idx = data.findIndex(d => d.month === selectedMonth.value)
+    const idx = data.value.findIndex(d => d.month === selectedMonth.value)
     chartOffset.value = Math.max(0, idx - 6)
   }
 }
 initChartOffset()
 
 const chartData = computed(() => {
-  const start = Math.max(0, Math.min(chartOffset.value, data.length - CHART_WINDOW))
-  const end = Math.min(data.length, start + CHART_WINDOW)
-  return data.slice(start, end)
+  const start = Math.max(0, Math.min(chartOffset.value, data.value.length - CHART_WINDOW))
+  const end = Math.min(data.value.length, start + CHART_WINDOW)
+  return data.value.slice(start, end)
 })
 
 const canChartBack = computed(() => chartOffset.value > 0)
-const canChartForward = computed(() => chartOffset.value + CHART_WINDOW < data.length)
+const canChartForward = computed(() => chartOffset.value + CHART_WINDOW < data.value.length)
 
 function chartBack() {
   chartOffset.value = Math.max(0, chartOffset.value - 5)
 }
 function chartForward() {
-  chartOffset.value = Math.min(data.length - CHART_WINDOW, chartOffset.value + 5)
+  chartOffset.value = Math.min(data.value.length - CHART_WINDOW, chartOffset.value + 5)
 }
 
 function onChartSelectMonth(month: string) {
@@ -89,6 +108,7 @@ function onChartSelectMonth(month: string) {
 
 // Reset offset when filter changes
 watch(selectedMonth, () => { initChartOffset() })
+watch(selectedRegion, () => { initChartOffset() })
 
 // Helper to average a subset of data
 function avg(subset: MonthData[]): MonthData {
@@ -110,10 +130,10 @@ function avg(subset: MonthData[]): MonthData {
 // Current data (for cards)
 const currentData = computed(() => {
   if (isYearSelection.value) {
-    const yearData = data.filter(d => d.month.startsWith(selectedYear.value!))
+    const yearData = data.value.filter(d => d.month.startsWith(selectedYear.value!))
     return avg(yearData)
   }
-  return data.find(d => d.month === selectedMonth.value)!
+  return data.value.find(d => d.month === selectedMonth.value)!
 })
 
 // Previous data (for delta arrows)
@@ -121,11 +141,11 @@ const previousData = computed((): MonthData | null => {
   if (isYearSelection.value) {
     // Compare to previous year
     const prevYear = String(+selectedYear.value! - 1)
-    const prevYearData = data.filter(d => d.month.startsWith(prevYear))
+    const prevYearData = data.value.filter(d => d.month.startsWith(prevYear))
     return prevYearData.length ? avg(prevYearData) : null
   }
-  const idx = data.findIndex(d => d.month === selectedMonth.value)
-  return idx > 0 ? data[idx - 1] : null
+  const idx = data.value.findIndex(d => d.month === selectedMonth.value)
+  return idx > 0 ? data.value[idx - 1] : null
 })
 
 function delta(current: number, previous: number | undefined): { icon: string; color: string } | null {
@@ -174,9 +194,9 @@ const serviceCards = computed(() => {
 // Performance Snapshot insights
 const insights = computed(() => {
   // Find worst months for each category
-  const worstMargin = [...data].sort((a, b) => a.grossMargin - b.grossMargin)[0]
-  const worstOTD = [...data].sort((a, b) => a.onTimeDelivery - b.onTimeDelivery)[0]
-  const worstException = [...data].sort((a, b) => b.exceptionRate - a.exceptionRate)[0]
+  const worstMargin = [...data.value].sort((a, b) => a.grossMargin - b.grossMargin)[0]
+  const worstOTD = [...data.value].sort((a, b) => a.onTimeDelivery - b.onTimeDelivery)[0]
+  const worstException = [...data.value].sort((a, b) => b.exceptionRate - a.exceptionRate)[0]
 
   const fmtMonth = (m: string) => {
     const [y, mo] = m.split('-')
@@ -214,6 +234,16 @@ const insights = computed(() => {
         Fast Forward Logistics
       </v-app-bar-title>
       <template #append>
+        <v-select
+          v-model="selectedRegion"
+          :items="regionOptions"
+          variant="outlined"
+          density="compact"
+          hide-details
+          style="min-width: 150px"
+          label="Region"
+          class="mr-3"
+        />
         <v-select
           v-model="selectedMonth"
           :items="monthOptions"
