@@ -341,20 +341,33 @@ const insights = computed(() => {
 
         <!-- Performance Snapshot -->
         <v-label class="text-h6 font-weight-bold text-grey-darken-2 mt-8 mb-3">Performance Snapshot</v-label>
-        <v-card variant="outlined" rounded="lg">
-          <v-list lines="three">
-            <v-list-item
-              v-for="insight in insights"
-              :key="insight.label"
-            >
-              <template #prepend>
-                <v-icon :color="insight.color" class="mr-3">{{ insight.icon }}</v-icon>
-              </template>
-              <v-list-item-title class="font-weight-bold">{{ insight.label }}</v-list-item-title>
-              <v-list-item-subtitle class="text-wrap">{{ insight.text }}</v-list-item-subtitle>
-            </v-list-item>
-          </v-list>
-        </v-card>
+        <v-row>
+          <v-col cols="12" md="8">
+            <v-card variant="flat" rounded="lg">
+              <v-list lines="three">
+                <v-list-item
+                  v-for="insight in insights"
+                  :key="insight.label"
+                >
+                  <template #prepend>
+                    <v-icon :color="insight.color" class="mr-3">{{ insight.icon }}</v-icon>
+                  </template>
+                  <v-list-item-title class="font-weight-bold">{{ insight.label }}</v-list-item-title>
+                  <v-list-item-subtitle class="text-wrap">{{ insight.text }}</v-list-item-subtitle>
+                </v-list-item>
+              </v-list>
+            </v-card>
+          </v-col>
+          <v-col cols="12" md="4" class="d-flex align-center">
+            <v-img
+              src="/truck.png"
+              alt="Fast Forward Logistics truck being unloaded"
+              rounded="lg"
+              cover
+              max-height="260"
+            />
+          </v-col>
+        </v-row>
       </v-container>
     </v-main>
   </v-app>
