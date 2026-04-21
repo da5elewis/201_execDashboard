@@ -249,7 +249,7 @@ const insights = computed(() => {
             md="4"
             lg
           >
-            <v-card variant="outlined" class="text-center" rounded="lg">
+            <v-card variant="outlined" class="text-center financial-card" rounded="lg">
               <v-card-item>
                 <v-card-subtitle class="font-weight-medium">{{ card.title }}</v-card-subtitle>
                 <v-card-title class="d-flex align-center justify-center">
@@ -277,7 +277,7 @@ const insights = computed(() => {
             sm="6"
             md="3"
           >
-            <v-card variant="outlined" class="text-center" rounded="lg">
+            <v-card variant="outlined" class="text-center financial-card" rounded="lg">
               <v-card-item>
                 <v-card-subtitle class="font-weight-medium">{{ card.title }}</v-card-subtitle>
                 <v-card-title class="d-flex align-center justify-center">
@@ -363,5 +363,9 @@ const insights = computed(() => {
 <style>
 html, body {
   background: #FAFAFA;
+}
+.financial-card {
+  background-color: #F5F5F5 !important;
+  border-color: #BDBDBD !important;
 }
 </style>
