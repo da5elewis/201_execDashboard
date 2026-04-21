@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
+import { useTheme } from 'vuetify'
 import metricsData from './data/metrics.json'
 import GrossMarginChart from './components/GrossMarginChart.vue'
 import ServiceChart from './components/ServiceChart.vue'
@@ -18,6 +19,14 @@ interface MonthData {
 }
 
 const data = metricsData as MonthData[]
+
+// Theme toggle
+const theme = useTheme()
+const isDark = ref(false)
+function toggleTheme() {
+  isDark.value = !isDark.value
+  theme.global.name.value = isDark.value ? 'dark' : 'light'
+}
 
 // Month picker — year-level + individual months
 const years = [...new Set(data.map(d => d.month.split('-')[0]))]
@@ -188,6 +197,14 @@ const insights = computed(() => {
           style="min-width: 220px"
           label="Period"
         />
+        <v-btn
+          icon
+          variant="text"
+          class="ml-3"
+          @click="toggleTheme"
+        >
+          <v-icon>{{ isDark ? 'mdi-weather-sunny' : 'mdi-weather-night' }}</v-icon>
+        </v-btn>
       </template>
     </v-app-bar>
 
@@ -206,7 +223,7 @@ const insights = computed(() => {
           >
             <v-card variant="outlined" class="text-center" rounded="lg">
               <v-card-item>
-                <v-card-subtitle class="text-uppercase font-weight-medium">{{ card.title }}</v-card-subtitle>
+                <v-card-subtitle class="font-weight-medium">{{ card.title }}</v-card-subtitle>
                 <v-card-title class="d-flex align-center justify-center">
                   <span class="text-h5 font-weight-bold">{{ card.value }}</span>
                   <v-icon
@@ -234,7 +251,7 @@ const insights = computed(() => {
           >
             <v-card variant="outlined" class="text-center" rounded="lg">
               <v-card-item>
-                <v-card-subtitle class="text-uppercase font-weight-medium">{{ card.title }}</v-card-subtitle>
+                <v-card-subtitle class="font-weight-medium">{{ card.title }}</v-card-subtitle>
                 <v-card-title class="d-flex align-center justify-center">
                   <span class="text-h5 font-weight-bold">{{ card.value }}</span>
                   <v-icon
@@ -255,7 +272,7 @@ const insights = computed(() => {
           <v-col cols="12" md="6">
             <v-card variant="outlined" rounded="lg">
               <v-card-item>
-                <v-card-title class="text-subtitle-1 font-weight-bold text-grey-darken-2">Gross Margin Over Time</v-card-title>
+                <v-card-title class="text-subtitle-2 font-weight-bold text-grey-darken-2">Gross Margin Over Time</v-card-title>
               </v-card-item>
               <v-card-text>
                 <GrossMarginChart :data="filteredData" :highlighted-month="selectedMonth" />
@@ -265,7 +282,7 @@ const insights = computed(() => {
           <v-col cols="12" md="6">
             <v-card variant="outlined" rounded="lg">
               <v-card-item>
-                <v-card-title class="text-subtitle-1 font-weight-bold text-grey-darken-2">On-Time Delivery & Dwell Time</v-card-title>
+                <v-card-title class="text-subtitle-2 font-weight-bold text-grey-darken-2">On-Time Delivery & Dwell Time</v-card-title>
               </v-card-item>
               <v-card-text>
                 <ServiceChart :data="filteredData" :highlighted-month="selectedMonth" />
