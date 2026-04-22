@@ -68,17 +68,29 @@ Generate a fake dataset as a JSON file (src/data/metrics.json).  28 months of da
 - First-Time-Right (percentage, vary monthly data, target >90%)
 - Dwell Time (Origin/Dest)	(number, vary monthly data ,target <2 hrs)
 
-## Layout (Vuetify)
-- v-app-bar at the top with dashboard title and month picker
-- month picker defaults to showing ALL months
-- When specific month slected all cards and charts filter to that month. when "all" is selected, show full year
-- below app bar: Headline "Financial Performance" and row of 5 summary cards (v-card) showing key metrics - Gross Margin, Net Margin, Accessorial Recovery Rate, Buy-Rate Variance, Revenue Quality (RPM) 
- below Financial Performance card row: Headline "Service Reliability" and row of 4 summary cards (v-card) showing key metrics - On-Time Delivery (OTD), Exception Rate, First-Time-Right %, Dwell Time (Origin/Dest)
-- below the cards: row of 2 charts
-    - Left: line chart showing gross margin over time
-    - Right: bar chart showing On-Time Delivery and Dwell Time over time
-- below that: one full-width list of insights Labeled "Performance Snapshot" including Top Margin Killer, Service Red Flag, Efficiency Gaps, each with an insight (example "Service Red Flag: OTD has dropped to 84% due to carrier capacity shifts, which is forcing us to buy expensive backup capacity, hurting margins.")
-- use v-container, v-row, v-col for reponsive grid layout
+## Design and Layout (Vuetify)
+
+### Header
+- Black (`#000000`) header bar with Oswald H3 dashboard title and airplane icon left-aligned
+- Region and Period selectors (equal width) top-right, stacked vertically on mobile (≤768px)
+
+### Main Content
+- Headline: "Financial Performance" followed by a row of 5 flat cards (Gross Margin, Net Margin, Accessorial Recovery, Buy-Rate Variance, Revenue Quality)
+    - Each card: large value, delta arrow, target (small), region label, and (if not National) a vertical 1px pipe and national value for comparison
+- Headline: "Service Reliability" followed by a row of 4 flat cards (On-Time Delivery, Exception Rate, First-Time-Right, Dwell Time)
+    - Same card layout as above
+- Two charts in a row:
+    - Left: Gross Margin Over Time (headline styled like other sections, no card border)
+    - Right: On-Time Delivery & Dwell Time (same headline, no card border)
+- Below: "Performance Snapshot" section with three Material Icon insights (warning, flag, trending_down), each with a short narrative
+- Below: Regional Performance Heatmap (no card border)
+
+### Responsive & Style
+- All layout uses Vuetify's v-container, v-row, v-col for grid
+- Cards and controls stack vertically on mobile
+- Clean, minimal, whitespace-rich, light theme only
+- All cards and charts use flat style (no border/stroke)
+- Consistent headline style for all sections
 
 ## Interactions
 - Month picker in app bar filters EVERYTHING - summary cars show that month's numbers, charts highlight or filter to that month
