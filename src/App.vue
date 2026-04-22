@@ -349,7 +349,7 @@ const heatmapRows = computed(() => {
             md="4"
             lg
           >
-            <v-card variant="outlined" class="text-center financial-card" rounded="lg" style="position: relative">
+            <v-card variant="flat" class="text-center financial-card" rounded="lg" style="position: relative">
               <v-tooltip v-if="card.tooltip" location="top" max-width="280">
                 <template #activator="{ props: tooltipProps }">
                   <v-icon v-bind="tooltipProps" size="14" color="grey" style="position: absolute; top: 8px; right: 8px; cursor: pointer">mdi-information-outline</v-icon>
@@ -357,26 +357,39 @@ const heatmapRows = computed(() => {
                 {{ card.tooltip }}
               </v-tooltip>
               <v-card-item>
-                <v-card-subtitle class="font-weight-medium">{{ card.title }}</v-card-subtitle>
+                <v-card-subtitle class="font-weight-medium card-label">{{ card.title }}</v-card-subtitle>
                 <v-card-title class="d-flex align-center justify-center">
-                  <div v-if="card.nationalValue" class="d-flex flex-column align-center">
+                  <template v-if="card.nationalValue">
+                    <div class="d-flex align-center">
+                      <div class="d-flex flex-column align-center">
+                        <span class="text-h5 font-weight-bold">{{ card.value }}</span>
+                        <span class="text-caption" style="color: #9E9E9E; line-height: 1; font-size: 0.5em">{{ selectedRegion }}</span>
+                      </div>
+                      <v-icon
+                        v-if="card.delta"
+                        :color="card.delta.color"
+                        size="20"
+                        class="ml-2"
+                      >{{ card.delta.icon }}</v-icon>
+                      <span class="vertical-pipe mx-2"></span>
+                      <div class="d-flex flex-column align-center ml-1">
+                        <span class="text-body-2" style="color: #9E9E9E">{{ card.nationalValue }}</span>
+                        <span class="text-caption" style="color: #BDBDBD; line-height: 1; font-size: 0.5em">National</span>
+                      </div>
+                    </div>
+                  </template>
+                  <template v-else>
                     <span class="text-h5 font-weight-bold">{{ card.value }}</span>
-                    <span class="text-caption" style="color: #9E9E9E; line-height: 1; font-size: 0.5em">{{ selectedRegion }}</span>
-                  </div>
-                  <span v-else class="text-h5 font-weight-bold">{{ card.value }}</span>
-                  <v-icon
-                    v-if="card.delta"
-                    :color="card.delta.color"
-                    size="20"
-                    class="ml-2"
-                  >{{ card.delta.icon }}</v-icon>
-                  <div v-if="card.nationalValue" class="d-flex flex-column align-center ml-3">
-                    <span class="text-body-2" style="color: #9E9E9E">{{ card.nationalValue }}</span>
-                    <span class="text-caption" style="color: #BDBDBD; line-height: 1; font-size: 0.5em">National</span>
-                  </div>
+                    <v-icon
+                      v-if="card.delta"
+                      :color="card.delta.color"
+                      size="20"
+                      class="ml-2"
+                    >{{ card.delta.icon }}</v-icon>
+                  </template>
                 </v-card-title>
               </v-card-item>
-              <v-card-text class="text-caption text-grey pt-0">Target: {{ card.target }}</v-card-text>
+              <v-card-text class="text-caption text-grey pt-0" style="font-size: 0.75em;">Target: {{ card.target }}</v-card-text>
             </v-card>
           </v-col>
         </v-row>
@@ -391,7 +404,7 @@ const heatmapRows = computed(() => {
             sm="6"
             md="3"
           >
-            <v-card variant="outlined" class="text-center financial-card" rounded="lg" style="position: relative">
+            <v-card variant="flat" class="text-center financial-card" rounded="lg" style="position: relative">
               <v-tooltip v-if="card.tooltip" location="top" max-width="280">
                 <template #activator="{ props: tooltipProps }">
                   <v-icon v-bind="tooltipProps" size="14" color="grey" style="position: absolute; top: 8px; right: 8px; cursor: pointer">mdi-information-outline</v-icon>
@@ -399,7 +412,7 @@ const heatmapRows = computed(() => {
                 {{ card.tooltip }}
               </v-tooltip>
               <v-card-item>
-                <v-card-subtitle class="font-weight-medium">{{ card.title }}</v-card-subtitle>
+                <v-card-subtitle class="font-weight-medium card-label">{{ card.title }}</v-card-subtitle>
                 <v-card-title class="d-flex align-center justify-center">
                   <div v-if="card.nationalValue" class="d-flex flex-column align-center">
                     <span class="text-h5 font-weight-bold">{{ card.value }}</span>
@@ -418,7 +431,7 @@ const heatmapRows = computed(() => {
                   </div>
                 </v-card-title>
               </v-card-item>
-              <v-card-text class="text-caption text-grey pt-0">Target: {{ card.target }}</v-card-text>
+              <v-card-text class="text-caption text-grey pt-0" style="font-size: 0.75em;">Target: {{ card.target }}</v-card-text>
             </v-card>
           </v-col>
         </v-row>
@@ -582,5 +595,16 @@ html, body {
   font-size: 28px;
   vertical-align: middle;
   margin-right: 28px;
+}
+.vertical-pipe {
+  display: inline-block;
+  width: 1px;
+  height: 2.2em;
+  background: #BDBDBD;
+  margin: 0 12px;
+  vertical-align: middle;
+}
+.card-label {
+  margin-bottom: 10px;
 }
 </style>
