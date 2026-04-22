@@ -516,7 +516,7 @@ html, body {
   border-color: #BDBDBD !important;
 }
 .app-header {
-  background-color: #9c0017 !important;
+  background-color: #000000 !important;
   color: #fff !important;
 }
 .header-icon {
