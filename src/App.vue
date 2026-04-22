@@ -439,10 +439,10 @@ const heatmapRows = computed(() => {
         <!-- Charts -->
         <v-row class="mt-8">
           <v-col cols="12" md="6">
-            <v-card variant="outlined" rounded="lg">
+            <v-card variant="flat" rounded="lg">
               <v-card-item>
                 <template #default>
-                  <v-card-title class="text-subtitle-2 font-weight-bold text-grey-darken-2">Gross Margin Over Time</v-card-title>
+                  <v-label class="text-h6 font-weight-bold text-grey-darken-2 mb-2">Gross Margin Over Time</v-label>
                 </template>
                 <template #append>
                   <v-btn icon variant="text" size="small" :disabled="!canChartBack" @click="chartBack">
@@ -459,10 +459,10 @@ const heatmapRows = computed(() => {
             </v-card>
           </v-col>
           <v-col cols="12" md="6">
-            <v-card variant="outlined" rounded="lg">
+            <v-card variant="flat" rounded="lg">
               <v-card-item>
                 <template #default>
-                  <v-card-title class="text-subtitle-2 font-weight-bold text-grey-darken-2">On-Time Delivery & Dwell Time</v-card-title>
+                  <v-label class="text-h6 font-weight-bold text-grey-darken-2 mb-2">On-Time Delivery & Dwell Time</v-label>
                 </template>
                 <template #append>
                   <v-btn icon variant="text" size="small" :disabled="!canChartBack" @click="chartBack">
@@ -483,7 +483,7 @@ const heatmapRows = computed(() => {
         <!-- Performance Heatmap -->
         <template v-if="!isRegionSelected || showHeatmap">
           <v-label class="text-h6 font-weight-bold text-grey-darken-2 mt-8 mb-3">Regional Performance Heatmap</v-label>
-          <v-card variant="outlined" rounded="lg">
+          <v-card variant="flat" rounded="lg">
             <v-card-text>
               <PerformanceHeatmap :rows="heatmapRows" />
             </v-card-text>
