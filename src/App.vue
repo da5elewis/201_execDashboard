@@ -229,29 +229,28 @@ const insights = computed(() => {
   const worstMargin = [...data.value].sort((a, b) => a.grossMargin - b.grossMargin)[0]
   const worstOTD = [...data.value].sort((a, b) => a.onTimeDelivery - b.onTimeDelivery)[0]
   const worstException = [...data.value].sort((a, b) => b.exceptionRate - a.exceptionRate)[0]
-
   const fmtMonth = (m: string) => {
     const [y, mo] = m.split('-')
     return new Date(+y, +mo - 1).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })
   }
-
+  const iconColor = isDark.value ? '#fff' : '#424242'
   return [
     {
       label: 'Top Margin Killer',
-      icon: 'mdi-alert-circle',
-      color: '#D32F2F',
+      icon: 'warning', // material icon name
+      color: iconColor,
       text: `Gross margin hit a low of ${worstMargin.grossMargin}% in ${fmtMonth(worstMargin.month)} while accessorial recovery dropped to ${worstMargin.accessorialRecovery}%, indicating unrecovered fees are compressing margins.`,
     },
     {
       label: 'Service Red Flag',
-      icon: 'mdi-flag',
-      color: '#E65100',
+      icon: 'flag', // material icon name
+      color: iconColor,
       text: `OTD dropped to ${worstOTD.onTimeDelivery}% in ${fmtMonth(worstOTD.month)} due to carrier capacity shifts, forcing expensive backup capacity purchases and hurting margins.`,
     },
     {
       label: 'Efficiency Gaps',
-      icon: 'mdi-cog-outline',
-      color: '#1565C0',
+      icon: 'trending_down', // material icon name
+      color: iconColor,
       text: `Exception rate spiked to ${worstException.exceptionRate}% in ${fmtMonth(worstException.month)} with first-time-right at just ${worstException.firstTimeRight}%, signaling process breakdowns that increase handling costs and rework.`,
     },
   ]
@@ -278,42 +277,48 @@ const heatmapRows = computed(() => {
 
 <template>
   <v-app>
-    <v-app-bar color="white" elevation="1" density="comfortable">
-      <v-app-bar-title class="font-weight-bold text-grey-darken-3">
-        <v-icon class="mr-2" color="primary">mdi-truck-fast-outline</v-icon>
-        Fast Forward Logistics
-      </v-app-bar-title>
-      <template #append>
-        <v-select
-          v-model="selectedRegion"
-          :items="regionOptions"
-          variant="outlined"
-          density="compact"
-          hide-details
-          style="min-width: 150px"
-          label="Region"
-          class="mr-3"
-        />
-        <v-select
-          v-model="selectedMonth"
-          :items="monthOptions"
-          item-title="title"
-          item-value="value"
-          variant="outlined"
-          density="compact"
-          hide-details
-          style="min-width: 220px"
-          label="Period"
-        />
-        <v-btn
-          icon
-          variant="text"
-          class="ml-3"
-          @click="toggleTheme"
-        >
-          <v-icon>{{ isDark ? 'mdi-weather-sunny' : 'mdi-weather-night' }}</v-icon>
-        </v-btn>
-      </template>
+    <v-app-bar class="app-header" elevation="2" height="190">
+      <div class="d-flex align-center ml-4">
+        <v-icon class="header-icon">mdi-airplane</v-icon>
+        <h3 class="header-title">Fast Forward Logistics</h3>
+      </div>
+      <div class="header-controls">
+        <div class="header-toggle-row">
+          <v-btn
+            icon
+            variant="text"
+            color="white"
+            class="theme-toggle-btn"
+            @click="toggleTheme"
+          >
+            <v-icon>{{ isDark ? 'mdi-weather-sunny' : 'mdi-weather-night' }}</v-icon>
+          </v-btn>
+        </div>
+        <div class="header-selects">
+          <v-select
+            v-model="selectedRegion"
+            :items="regionOptions"
+            variant="outlined"
+            density="compact"
+            hide-details
+            style="min-width: 180px; max-width: 180px;"
+            label="Region"
+            class="header-select"
+          />
+          <v-select
+            v-model="selectedMonth"
+            :items="monthOptions"
+            item-title="title"
+            item-value="value"
+            variant="outlined"
+            density="compact"
+            hide-details
+            style="min-width: 180px; max-width: 180px;"
+            label="Period"
+            class="header-select"
+          />
+        </div>
+      </div>
     </v-app-bar>
 
     <v-main>
@@ -329,7 +334,7 @@ const heatmapRows = computed(() => {
                   :key="insight.label"
                 >
                   <template #prepend>
-                    <v-icon :color="insight.color" class="mr-3">{{ insight.icon }}</v-icon>
+                    <span class="material-icons insight-mat-icon" :style="{ color: insight.color }">{{ insight.icon }}</span>
                   </template>
                   <v-list-item-title class="font-weight-bold">{{ insight.label }}</v-list-item-title>
                   <v-list-item-subtitle class="text-wrap">{{ insight.text }}</v-list-item-subtitle>
@@ -511,5 +516,86 @@ html, body {
 .financial-card {
   background-color: #F5F5F5 !important;
   border-color: #BDBDBD !important;
+}
+.app-header {
+  background-color: #9c0017 !important;
+  color: #fff !important;
+}
+.header-icon {
+  font-size: 64px !important;
+  color: #fff;
+  margin-right: 16px;
+}
+.header-title {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 600;
+  font-size: 1.6rem;
+  color: #fff;
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+.header-select .v-field {
+  color: #fff !important;
+}
+.header-select .v-field__outline {
+  --v-field-border-opacity: 0.4;
+  color: #fff !important;
+}
+.header-select .v-label {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+.header-select .v-select__selection-text,
+.header-select .v-field__input {
+  color: #fff !important;
+}
+.header-select .v-icon {
+  color: #fff !important;
+}
+/* Header controls layout */
+.header-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+  flex: 1;
+  margin-right: 24px;
+}
+.header-toggle-row {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+.header-selects {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  margin-top: 8px;
+}
+.theme-toggle-btn {
+  margin-left: 0;
+  margin-top: 0;
+}
+@media (max-width: 768px) {
+  .header-controls {
+    flex-direction: column;
+    align-items: flex-end;
+    margin-right: 8px;
+  }
+  .header-selects {
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 8px;
+  }
+  .theme-toggle-btn {
+    margin-left: 0;
+    margin-top: 0;
+  }
+}
+/* Material icon for insights */
+.insight-mat-icon {
+  font-family: 'Material Icons', 'Material Symbols Outlined', sans-serif;
+  font-size: 28px;
+  vertical-align: middle;
+  margin-right: 28px;
 }
 </style>
