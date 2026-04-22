@@ -45,13 +45,9 @@ function regionDataFor(region: string): MonthData[] {
   return rawData.map(d => ({ month: d.month, ...d.regions[region] } as MonthData))
 }
 
-// Theme toggle
+// Force light mode
 const theme = useTheme()
-const isDark = ref(false)
-function toggleTheme() {
-  isDark.value = !isDark.value
-  theme.global.name.value = isDark.value ? 'dark' : 'light'
-}
+theme.global.name.value = 'light'
 
 // Month picker — year-level + individual months
 const years = [...new Set(rawData.map(d => d.month.split('-')[0]))]
@@ -233,7 +229,7 @@ const insights = computed(() => {
     const [y, mo] = m.split('-')
     return new Date(+y, +mo - 1).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })
   }
-  const iconColor = isDark.value ? '#fff' : '#424242'
+  const iconColor = '#424242'
   return [
     {
       label: 'Top Margin Killer',
@@ -283,17 +279,6 @@ const heatmapRows = computed(() => {
         <h3 class="header-title">Fast Forward Logistics</h3>
       </div>
       <div class="header-controls">
-        <div class="header-toggle-row">
-          <v-btn
-            icon
-            variant="text"
-            color="white"
-            class="theme-toggle-btn"
-            @click="toggleTheme"
-          >
-            <v-icon>{{ isDark ? 'mdi-weather-sunny' : 'mdi-weather-night' }}</v-icon>
-          </v-btn>
-        </div>
         <div class="header-selects">
           <v-select
             v-model="selectedRegion"
